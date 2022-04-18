@@ -1,3 +1,4 @@
 export enum SpentTypeEnum {
-    NUBANKCARD,
+    CARD,
+    CASH,
 }

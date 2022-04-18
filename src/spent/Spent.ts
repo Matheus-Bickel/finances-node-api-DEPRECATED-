@@ -16,7 +16,7 @@ export abstract class Spent {
         return this.name
     }
 
-    getSpent(): number {
+    getSvalue(): number {
         return this.value
     }
 
