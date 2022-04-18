@@ -1,9 +1,11 @@
-import { response, Router } from "express";
+import { Router } from 'express'
+import bodyParser from 'body-parser'
 
-const router = Router();
+const router = Router()
+const jsonParser = bodyParser.json()
 
-router.post("/users", (request, response) => {
-  return response.status(201).send("Created");
-});
+router.post('/createspent', jsonParser, (request, response) => {
+    return response.status(201).send('Created')
+})
 
-export { router };
+export { router }
