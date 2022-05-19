@@ -1,9 +1,9 @@
-import { response, Router } from "express";
+import { Request, Response, Router } from 'express'
 
-const router = Router();
+const router = Router()
 
-router.post("/users", (request, response) => {
-  return response.status(201).send("Created");
-});
+router.post('/spent', (request: Request, response: Response) => {
+    return response.status(201).send('Created')
+})
 
-export { router };
+export { router }
