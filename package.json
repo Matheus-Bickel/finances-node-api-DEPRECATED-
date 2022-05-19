@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "github:types/express",
+    "body-parser": "^1.20.0",
     "express": "^4.17.3",
     "ts-node-dev": "^1.1.8",
     "tsyringe": "^4.6.0",
