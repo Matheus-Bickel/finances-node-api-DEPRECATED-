@@ -6,6 +6,9 @@ export interface SpentsDataParams {
     type: SpentTypeEnum
     value: number
     date: Date
+    parcels?: number
+    parcelsInitialDate?: Date
+    parcelsfinalDate?: Date
 }
 
 export abstract class SpentsData {
@@ -29,5 +32,17 @@ export abstract class SpentsData {
 
     getDate(): Date {
         return this.params.date
+    }
+
+    getParcels(): number | undefined {
+        return this.params.parcels
+    }
+
+    getInitialParcelsDate(): Date | undefined {
+        return this.params.parcelsInitialDate
+    }
+
+    getFinalParcelsDate(): Date | undefined {
+        return this.params.parcelsfinalDate
     }
 }
