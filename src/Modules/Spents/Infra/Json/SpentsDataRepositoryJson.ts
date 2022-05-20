@@ -1,8 +1,9 @@
+import { injectable } from 'tsyringe'
 import { SpentsDataParams } from '../../Domain/SpentsData'
 import { CreditSpentsDataToJsonAdapter } from '../Adapters/CreditSpentsDataToJsonAdapter'
-import { injectable } from 'tsyringe'
-import fs from 'fs'
 import { SpentsDataRepository } from '../../Domain/SpentsDataRepository'
+
+import fs from 'fs'
 
 @injectable()
 export class SpentsDataRepositoryJson implements SpentsDataRepository {
@@ -10,7 +11,7 @@ export class SpentsDataRepositoryJson implements SpentsDataRepository {
         const toJson = CreditSpentsDataToJsonAdapter.from()
         const spentJson = JSON.stringify(toJson.toJson(data))
 
-        fs.writeFile('../../../../../mocks/json/CreditSpent.json', spentJson, (err) => {
+        fs.writeFile('../../../../../mocks/json/creditSpent.json', spentJson, (err) => {
             if (err) {
                 throw err
             }
