@@ -1,4 +1,4 @@
-import { SpentsData, SpentsDataParams } from '../../Domain/SpentsData'
+import { SpentsData, SpentsDataParams } from '../Domain/SpentsData'
 
 export interface DebitCardSpentDataParams {
     recurrent: boolean
@@ -6,10 +6,7 @@ export interface DebitCardSpentDataParams {
 }
 
 export class DebitCardSpentData extends SpentsData {
-    constructor(
-        protected params: SpentsDataParams,
-        protected debitParams: DebitCardSpentDataParams
-    ) {
+    constructor(protected params: SpentsDataParams, protected debitParams: DebitCardSpentDataParams) {
         super(params)
     }
 

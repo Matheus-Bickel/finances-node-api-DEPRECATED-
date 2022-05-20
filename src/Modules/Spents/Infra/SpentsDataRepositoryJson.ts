@@ -1,7 +1,7 @@
-import { SpentsDataParams } from '../../Domain/SpentsData'
-import { SpentsDataRepository } from '../../Domain/SpentsDataRepository'
+import { SpentsDataParams } from '../Domain/SpentsData'
+import { SpentsDataRepository } from '../Domain/SpentsDataRepository'
 import fs from 'fs'
-import { CreditSpentsDataToJsonAdapter } from '../Adapters/CreditSpentsDataToJsonAdapter'
+import { CreditSpentsDataToJsonAdapter } from './Adapters/CreditSpentsDataToJsonAdapter'
 
 export class SpentsDataRepositoryJson implements SpentsDataRepository {
     async save(data: SpentsDataParams): Promise<SpentsDataParams> {
