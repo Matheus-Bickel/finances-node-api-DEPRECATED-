@@ -1,10 +1,10 @@
 import { XmlConverterToJson } from '../../../../Shared/XmlConverterToJson'
-import { SpentsData, SpentsDataParams } from '../../Domain/SpentsData'
-import { SpentsRepositoryXml } from '../../Domain/SpentsReposityXml'
+import { SpentsData } from '../../Domain/SpentsData'
 import { SpentXmlToSpentData } from '../Adapters/SpentXmlToSpentData'
 
 import fs from 'fs'
 import util from 'util'
+import { SpentsRepositoryXml } from '../../Domain/SpentsRepositoryXml'
 
 const readFile = util.promisify(fs.readFile)
 
