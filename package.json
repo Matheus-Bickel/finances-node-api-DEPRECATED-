@@ -18,7 +18,8 @@
         "body-parser": "^1.20.0",
         "dotenv": "^16.0.1",
         "express": "^4.17.3",
-        "tsyringe": "^4.6.0"
+        "tsyringe": "^4.6.0",
+        "xml-js": "^1.6.11"
     },
     "devDependencies": {
         "@types/jest": "^27.5.1",

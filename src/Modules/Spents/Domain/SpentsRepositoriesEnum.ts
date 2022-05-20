@@ -1,3 +1,4 @@
 export enum SpentsRepositoriesEnum {
-    APP_REPOSITORY = 'SpentsDataRepository',
+    XML_REPOSITORY = 'SpentsDataRepository',
+    JSON_REPOSITORY = 'SpentsDataRepository',
 }
