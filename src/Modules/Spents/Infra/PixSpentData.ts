@@ -1,4 +1,4 @@
-import { SpentsData, SpentsDataParams } from '../../Domain/SpentsData'
+import { SpentsData, SpentsDataParams } from '../Domain/SpentsData'
 
 export interface PixSpentDataParams {
     forWho: string
@@ -7,10 +7,7 @@ export interface PixSpentDataParams {
 }
 
 export class PixSpentData extends SpentsData {
-    constructor(
-        protected params: SpentsDataParams,
-        protected pixParams: PixSpentDataParams
-    ) {
+    constructor(protected params: SpentsDataParams, protected pixParams: PixSpentDataParams) {
         super(params)
     }
 
