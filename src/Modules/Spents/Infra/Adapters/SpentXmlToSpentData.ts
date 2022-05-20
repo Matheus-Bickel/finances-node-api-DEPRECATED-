@@ -5,7 +5,7 @@ export class SpentXmlToSpentData extends SpentsData {
         super(params)
     }
 
-    static of(params: SpentsDataParams): SpentXmlToSpentData {
+    static of(params: SpentsDataParams): SpentsData {
         return new SpentXmlToSpentData(params)
     }
 }

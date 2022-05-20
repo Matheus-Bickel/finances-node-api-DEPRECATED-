@@ -1,5 +1,5 @@
-import { SpentsData } from './SpentsData'
+import { SpentsData, SpentsDataParams } from './SpentsData'
 
 export interface SpentsRepositoryXml {
-    getData(data: SpentsData): Promise<SpentsData>
+    getData(): Promise<SpentsData>
 }
