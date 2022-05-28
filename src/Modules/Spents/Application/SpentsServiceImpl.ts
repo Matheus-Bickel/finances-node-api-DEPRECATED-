@@ -1,11 +1,11 @@
 import { inject } from 'tsyringe'
-import { SpentsDataRepository } from '../Domain/SpentsDataRepository'
 import { SpentService } from '../Domain/SpentService'
 import { SpentsRepositoriesEnum } from '../Domain/SpentsRepositoriesEnum'
+import { SpentsDataRepositoryApp } from '../Infra/Json/SpentsDataRepositoryApp'
 
 export class SpentServiceImpl implements SpentService {
     constructor(
-        @inject(SpentsRepositoriesEnum.JSON_REPOSITORY) private SpentDataRepositoryJsonL: SpentsDataRepository
+        @inject(SpentsRepositoriesEnum.APP_REPOSITORY) private SpentDataRepositoryApp: SpentsDataRepositoryApp
     ) {}
 
     async createSpent(): Promise<void> {}

@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Uber",
+        "type": "CREDIT",
+        "value": 12,
+        "date": "20-05-2022",
+        "parcels": 0,
+        "parcelsInitialDate": "",
+        "parcelsfinalDate": ""
+    },
+    {
+        "id": 2,
+        "name": "Uber",
+        "type": "DEBIT",
+        "value": 12,
+        "date": "20-05-2022",
+        "parcels": 0,
+        "parcelsInitialDate": "",
+        "parcelsfinalDate": ""
+    },
+    {
+        "id": 3,
+        "name": "Uber",
+        "type": "PIX",
+        "value": 12,
+        "date": "20-05-2022",
+        "parcels": 0,
+        "parcelsInitialDate": "",
+        "parcelsfinalDate": ""
+    },
+    {
+        "id": 1,
+        "name": "Uber",
+        "type": "CREDIT",
+        "value": 12,
+        "date": "20-05-2022",
+        "parcels": 0,
+        "parcelsInitialDate": "",
+        "parcelsfinalDate": ""
+    }
+]

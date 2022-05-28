@@ -6,7 +6,7 @@ import { SpentsDataRepository } from '../../Domain/SpentsDataRepository'
 import fs from 'fs'
 
 @injectable()
-export class SpentsDataRepositoryJson implements SpentsDataRepository {
+export class SpentsDataRepositoryApp implements SpentsDataRepository {
     async save(data: SpentsDataParams): Promise<SpentsDataParams> {
         const toJson = CreditSpentsDataToJsonAdapter.from()
         const spentJson = JSON.stringify(toJson.toJson(data))
