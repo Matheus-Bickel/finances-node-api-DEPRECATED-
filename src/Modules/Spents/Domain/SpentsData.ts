@@ -1,3 +1,4 @@
+import { Json } from '../../../lib/Json'
 import { SpentTypeEnum } from './SpentTypeEnum'
 
 export interface SpentsDataParams {
@@ -6,9 +7,9 @@ export interface SpentsDataParams {
     type: SpentTypeEnum
     value: number
     date: Date
-    parcels?: number
-    parcelsInitialDate?: Date
-    parcelsfinalDate?: Date
+    parcels: number
+    parcelsInitialDate: Date
+    parcelsfinalDate: Date
 }
 
 export abstract class SpentsData {
@@ -44,5 +45,18 @@ export abstract class SpentsData {
 
     getFinalParcelsDate(): Date | undefined {
         return this.params.parcelsfinalDate
+    }
+
+    toJson(): Json {
+        return {
+            id: this.getId(),
+            name: this.getName(),
+            type: this.getType(),
+            value: this.getValue(),
+            date: this.getDate().toDateString(),
+            parcels: this.getParcels().toString(),
+            initialParcelsDate: this.getInitialParcelsDate(),
+            finalParcelsDate: this.getFinalParcelsDate()
+        }
     }
 }
