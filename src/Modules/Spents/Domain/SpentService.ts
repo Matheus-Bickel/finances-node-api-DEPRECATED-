@@ -1,3 +1,5 @@
+import { SpentsData, SpentsDataParams } from "./SpentsData";
+
 export interface SpentService {
-    createSpent(): Promise<void>
+    export(data: SpentsData): Promise<void>
 }

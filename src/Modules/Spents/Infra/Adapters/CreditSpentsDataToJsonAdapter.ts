@@ -1,17 +1,17 @@
 import { Json } from '../../../../lib/Json'
 import { JsonTransform } from '../../../../lib/JsonTransform'
-import { SpentsDataParams } from '../../Domain/SpentsData'
+import { SpentsData } from '../../Domain/SpentsData'
 
 export class CreditSpentsDataToJsonAdapter implements JsonTransform {
-    toJson(data: SpentsDataParams): Json {
+    toJson(data: SpentsData[]): Json {
         return {
-            id: data.id.toString(),
-            name: data.name,
-            value: data.value.toString(),
-            type: data.type.toString(),
-            parcels: data.parcels.toString(),
-            parcelsInitialDate: data.parcelsInitialDate.toDateString(),
-            parcelsfinalDate: data.parcelsfinalDate.toDateString(),
+            id: data[0],
+            name: data[1],
+            value: data[2],
+            type: data[3],
+            parcels: data[4],
+            parcelsInitialDate:data[5],
+            parcelsfinalDate: data[6],
         }
     }
 
