@@ -11,20 +11,17 @@ export class SpentServiceImpl implements SpentService {
         @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsRepository: GetSpentsRepositoryJson
     ) {}
 
-    private getSpent(data: SpentsData[]): SpentsData[] {
+    private getSpent(data: SpentsData): SpentsData {
         const spent = this.getSpentsRepository.getSpents(data)
 
-        return data
+        return spent
     }
 
-    async export(data: SpentsData[]) {
-        const spentsToSave = SpentsData[0]
+    async export(data: SpentsData) {
+        const spentsToSave = []
         const spents = this.getSpent(data)
         
-        for(const spent of spents) {
-            if(spent)
-            spentsToSave.push(spent)
-        }
+        spentsToSave.push(spents)
 
         await this.spentsDataRepositoryJson.save(spentsToSave)
     }

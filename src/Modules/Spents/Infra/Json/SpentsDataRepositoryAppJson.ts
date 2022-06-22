@@ -7,7 +7,7 @@ import fs from 'fs'
 
 @injectable()
 export class SpentsDataRepositoryAppJson implements SpentsDataRepository {
-    async save(data: SpentsData): Promise<SpentsData> {
+    async save(data: SpentsData[]): Promise<SpentsData[]> {
         const toJson = CreditSpentsDataToJsonAdapter.from()
         const spentJson = JSON.stringify(toJson.toJson(data))
         fs.writeFile('mocks/json/creditSpent.json', spentJson, (err) => {

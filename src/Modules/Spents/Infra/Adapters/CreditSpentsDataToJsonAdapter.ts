@@ -3,15 +3,15 @@ import { JsonTransform } from '../../../../lib/JsonTransform'
 import { SpentsData } from '../../Domain/SpentsData'
 
 export class CreditSpentsDataToJsonAdapter implements JsonTransform {
-    toJson(data: SpentsData): Json {
+    toJson(data: SpentsData[]): Json {
         return {
-            id: data.getId().toString(),
-            name: data.getName(),
-            value: data.getValue().toString(),
-            type: data.getDate.toString(),
-            parcels: data.getParcels.toString(),
-            parcelsInitialDate: data.getInitialParcelsDate().toDateString(),
-            parcelsfinalDate: data.getFinalParcelsDate().toDateString(),
+            id: data[0],
+            name: data[1],
+            value: data[2],
+            type: data[3],
+            parcels: data[4],
+            parcelsInitialDate:data[5],
+            parcelsfinalDate: data[6],
         }
     }
 
