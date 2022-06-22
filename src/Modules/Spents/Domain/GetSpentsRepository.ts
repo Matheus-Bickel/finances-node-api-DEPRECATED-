@@ -1,5 +1,6 @@
+import { Json } from "../../../lib/Json";
 import { SpentsData, SpentsDataParams } from "./SpentsData";
 
 export interface GetSpentsRepository {
-    getSpents(spentsData: SpentsDataParams): SpentsData
+    getSpents(data: SpentsData[]): Promise<void>
 }
