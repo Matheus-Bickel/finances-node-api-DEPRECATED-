@@ -18,7 +18,7 @@ export class SpentServiceImpl implements SpentService {
     }
 
     async export(data: SpentsData[]) {
-        const spentsToSave = []
+        const spentsToSave = SpentsData[0]
         const spents = this.getSpent(data)
         
         for(const spent of spents) {
