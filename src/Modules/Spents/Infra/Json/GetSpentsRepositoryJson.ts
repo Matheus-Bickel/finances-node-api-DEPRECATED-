@@ -13,6 +13,7 @@ export class GetSpentsRepositoryJson implements GetSpentsRepository {
             encoding: 'utf-8'
         })
 
-        return spent
+        const json = JSON.parse(spent)
+        return json
     }
 }
