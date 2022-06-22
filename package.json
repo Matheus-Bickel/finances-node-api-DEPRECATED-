@@ -4,11 +4,10 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+        "start": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/router.ts",
         "build": "tsc --build",
-        "test": "npx jest --detectOpenHandles",
-        "coverage": "npx jest --coverage",
-        "test:debug": "jest --runInBand --detectOpenHandles"
+        "test": "npx jest --detectOpenHandles --runInBand",
+        "coverage": "npx jest --coverage"
     },
     "keywords": [],
     "author": "",
