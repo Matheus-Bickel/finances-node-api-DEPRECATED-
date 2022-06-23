@@ -1,4 +1,4 @@
-import tsyringe, { injectable } from  'tsyringe'
+import { injectable } from  'tsyringe'
 import { GetSpentsRepository } from "../../Domain/GetSpentsRepository";
 import { SpentsData } from "../../Domain/SpentsData";
 
@@ -15,5 +15,11 @@ export class GetSpentsRepositoryJson implements GetSpentsRepository {
 
         const json = JSON.parse(spent)
         return json
+    }
+
+    static from(): GetSpentsRepositoryJson {
+        const getSpents = new GetSpentsRepositoryJson()
+
+        return getSpents
     }
 }
