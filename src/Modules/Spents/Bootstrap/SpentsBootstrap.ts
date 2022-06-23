@@ -1,5 +1,5 @@
 import { container } from 'tsyringe'
-import { SpentsEnum } from '../Application/SpentsEnum'
+import { SpentsEnum } from '../Domain/SpentsEnum'
 import { SpentServiceImpl } from '../Application/SpentServiceImpl'
 import { SpentsRepositoriesEnum } from '../Domain/SpentsRepositoriesEnum'
 import { GetSpentsRepositoryJson } from '../Infra/Json/GetSpentsRepositoryJson'

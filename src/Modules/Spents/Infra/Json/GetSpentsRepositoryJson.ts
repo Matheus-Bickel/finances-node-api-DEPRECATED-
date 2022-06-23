@@ -1,4 +1,4 @@
-import tsyringe, { injectable } from  'tsyringe'
+import { injectable } from  'tsyringe'
 import { GetSpentsRepository } from "../../Domain/GetSpentsRepository";
 import { SpentsData } from "../../Domain/SpentsData";
 
