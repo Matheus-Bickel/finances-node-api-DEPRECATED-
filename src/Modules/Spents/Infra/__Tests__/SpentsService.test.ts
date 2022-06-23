@@ -6,7 +6,7 @@ import { SpentsBootstrap } from '../../Bootstrap/SpentsBootstrap'
 import { SpentService } from '../../Domain/SpentService'
 import { SpentsDataTest } from './SpentsDataTest'
 
-describe('Should take and save the spent', () => {
+describe('Should get and save the spent', () => {
     beforeAll(async () => {
         await new SpentsBootstrap().handler()
     })
