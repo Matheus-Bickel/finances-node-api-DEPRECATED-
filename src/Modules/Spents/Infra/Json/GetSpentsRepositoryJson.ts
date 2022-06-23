@@ -16,4 +16,10 @@ export class GetSpentsRepositoryJson implements GetSpentsRepository {
         const json = JSON.parse(spent)
         return json
     }
+
+    static from(): GetSpentsRepositoryJson {
+        const getSpents = new GetSpentsRepositoryJson()
+
+        return getSpents
+    }
 }
