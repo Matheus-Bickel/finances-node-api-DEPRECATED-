@@ -20,7 +20,6 @@ export class SpentServiceImpl implements SpentService {
     async export(data: SpentsData) {
         const spentsToSave = []
         const spents = await this.getSpent(data)
-        console.log(spents)
         
         spentsToSave.push(spents)
 
