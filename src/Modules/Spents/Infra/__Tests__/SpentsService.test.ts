@@ -12,7 +12,7 @@ describe('Should get and save the spent', () => {
     })
 
     it('save spent', async () => {
-        const services = container.resolve<SpentService>(SpentsEnum.SERVICE)
+        const services = container.resolve<SpentService>(SpentsEnum.SAVE_SPENTS_SERVICE)
         
         await services.export(SpentsDataTest.from())
     })
