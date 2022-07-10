@@ -20,7 +20,6 @@ export class GetSpentsServiceImpl implements GetSpentsService {
         const jsonAdapter = SpentsDataToJsonAdapter.from()
         const spentJson = jsonAdapter.toJson(spents)
         
-        console.log(spentJson)
         return spentJson
     }
 }

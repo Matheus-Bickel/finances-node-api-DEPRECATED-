@@ -1,13 +1,22 @@
 import 'reflect-metadata'
-import { Request, Response, Router } from 'express'
-import { app } from './app'
 
-const jsonSpents = require('../mocks/json/spents.json')
+import { app } from './app'
+import { Request, Response, Router } from 'express'
+import { GetSpentsController } from './Modules/Spents/Infra/Http/Controllers/GetSpentsController';
+import { SpentsData } from './Modules/Spents/Domain/SpentsData';
+
+
 const router = Router()
+
+
 app.use(router);
 
-router.get('/finances', async (request: Request, response: Response) => {
-    return response.send(jsonSpents)
+router.get('/spents', (req: Request, res: Response) => {
+    let data: SpentsData
+    const spent = new GetSpentsController().getSpents(data)
+
+    console.log(spent)
+    res.send(spent)
 })
 
 export { router }
