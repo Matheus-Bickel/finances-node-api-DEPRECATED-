@@ -7,14 +7,15 @@ export class SpentsDataTest extends SpentsData {
     }
 
     static from(): SpentsData {
-        return new SpentsDataTest({
-        "id": 1,
-        "name": "Uber",
-        "type": SpentTypeEnum.CREDIT,
-        "value": 12,
-        "date": new Date(),
-        "parcels": 0,
-        "parcelsInitialDate": new Date(),
-        "parcelsfinalDate": new Date()})
+        return new SpentsDataTest ({
+            "id": 1,
+            "name": "Uber",
+            "type": SpentTypeEnum.CREDIT,
+            "value": 12,
+            "date": new Date(),
+            "parcels": 0,
+            "parcelsInitialDate": new Date(),
+            "parcelsfinalDate": new Date()
+        })
     }
 }
