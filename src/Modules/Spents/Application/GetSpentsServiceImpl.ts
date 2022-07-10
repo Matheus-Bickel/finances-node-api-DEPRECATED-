@@ -4,7 +4,6 @@ import { SpentsRepositoriesEnum } from "../Domain/SpentsRepositoriesEnum";
 import { GetSpentsRepositoryJson } from "../Infra/Json/GetSpentsRepositoryJson";
 import { GetSpentsService } from "../Domain/GetSpentsService";
 import { SpentsDataToJsonAdapter } from "../Infra/Adapters/SpentsDataToJsonAdapter";
-import { runMain } from "module";
 @injectable()
 export class GetSpentsServiceImpl implements GetSpentsService {
     constructor(
