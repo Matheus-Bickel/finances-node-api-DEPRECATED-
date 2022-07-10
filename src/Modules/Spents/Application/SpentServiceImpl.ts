@@ -11,7 +11,7 @@ export class SpentServiceImpl implements SpentService {
         @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsRepository: GetSpentsRepositoryJson
     ) {}
 
-    private getSpent(data: SpentsData): Promise<SpentsData> {
+    private getSpent(data: SpentsData): Promise<SpentsData[]> {
         const spent = this.getSpentsRepository.getSpents(data)
 
         return spent

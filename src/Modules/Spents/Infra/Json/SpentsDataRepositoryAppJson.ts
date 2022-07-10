@@ -2,7 +2,6 @@ import { injectable } from 'tsyringe'
 import { SpentsData } from '../../Domain/SpentsData'
 import { SpentsDataToJsonAdapter } from '../Adapters/SpentsDataToJsonAdapter'
 import { SpentsDataRepository } from '../../Domain/SpentsDataRepository'
-import { SpentTypeEnum } from '../../Domain/SpentTypeEnum'
 
 import fs from 'fs'
 const spentsJson = require('../../../../../mocks/json/spents.json')
