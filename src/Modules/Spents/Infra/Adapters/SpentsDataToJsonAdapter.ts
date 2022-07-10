@@ -2,7 +2,7 @@ import { Json } from '../../../../lib/Json'
 import { JsonTransform } from '../../../../lib/JsonTransform'
 import { SpentsData } from '../../Domain/SpentsData'
 
-    export class CreditSpentsDataToJsonAdapter implements JsonTransform {
+    export class SpentsDataToJsonAdapter implements JsonTransform {
         toJson(data: SpentsData[]): Json {
             return {
                 id: data[0],
@@ -15,7 +15,7 @@ import { SpentsData } from '../../Domain/SpentsData'
             }
         }
 
-        static from(): CreditSpentsDataToJsonAdapter {
-            return new CreditSpentsDataToJsonAdapter()
+        static from(): SpentsDataToJsonAdapter {
+            return new SpentsDataToJsonAdapter()
         }
     }
