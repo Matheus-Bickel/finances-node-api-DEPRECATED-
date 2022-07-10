@@ -1,6 +1,6 @@
 import 'reflect-metadata'
-import { container } from 'tsyringe'
 
+import { container } from 'tsyringe'
 import { SpentsBootstrap } from "../../Bootstrap/SpentsBootstrap"
 import { GetSpentsService } from '../../Domain/GetSpentsService'
 import { SpentsEnum } from '../../Domain/SpentsEnum'
