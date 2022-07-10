@@ -10,6 +10,16 @@
         "parcelsfinalDate": ""
     },
     {
+        "id": 10,
+        "name": "Uber 2",
+        "type": "CREDIT",
+        "value": 12,
+        "date": "20-05-2022",
+        "parcels": 0,
+        "parcelsInitialDate": "",
+        "parcelsfinalDate": ""
+    },
+    {
         "id": 2,
         "name": "Uber",
         "type": "DEBIT",

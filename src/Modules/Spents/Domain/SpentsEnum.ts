@@ -1,3 +1,4 @@
 export enum SpentsEnum {
-    SERVICE = 'SpentService'
+    SAVE_SPENTS_SERVICE = 'SpentService',
+    GET_SPENTS_SERVICE = 'GetSpentsSerivce'
 }

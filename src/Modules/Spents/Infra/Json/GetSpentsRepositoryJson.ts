@@ -8,7 +8,7 @@ import util from 'util'
 const readFile = util.promisify(fs.readFile)
 @injectable()
 export class GetSpentsRepositoryJson implements GetSpentsRepository {
-    async getSpents(data: SpentsData): Promise<SpentsData> {
+    async getSpents(data: SpentsData): Promise<SpentsData[]> {
         const spent = await readFile('mocks/json/spents.json', {
             encoding: 'utf-8'
         })

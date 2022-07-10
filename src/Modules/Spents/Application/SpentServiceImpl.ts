@@ -11,7 +11,7 @@ export class SpentServiceImpl implements SpentService {
         @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsRepository: GetSpentsRepositoryJson
     ) {}
 
-    private getSpent(data: SpentsData): Promise<SpentsData> {
+    private getSpent(data: SpentsData): Promise<SpentsData[]> {
         const spent = this.getSpentsRepository.getSpents(data)
 
         return spent
@@ -20,10 +20,8 @@ export class SpentServiceImpl implements SpentService {
     async export(data: SpentsData) {
         const spentsToSave = []
         const spents = await this.getSpent(data)
-        console.log(spents)
-        
+    
         spentsToSave.push(spents)
-
         await this.spentsDataRepositoryJson.save(spentsToSave)
     }
 }
