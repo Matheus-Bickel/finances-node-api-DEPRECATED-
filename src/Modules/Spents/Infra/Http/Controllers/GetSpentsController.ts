@@ -1,15 +1,25 @@
-import { container } from "tsyringe";
+import { inject } from "tsyringe";
+import { Response, Request } from "express";
 
 import { Controller } from "../../../../../App/Http/Controllers/Controller";
-import { GetSpentsService } from "../../../Domain/GetSpentsService";
 import { SpentsData } from "../../../Domain/SpentsData";
 import { SpentsEnum } from "../../../Domain/SpentsEnum";
-
+import { GetSpentsRepositoryJson } from "../../Json/GetSpentsRepositoryJson";
 export class GetSpentsController implements Controller {
-    constructor(){}
-    async getSpents(data: SpentsData) {
-        const spents = container.resolve<GetSpentsService>(SpentsEnum.GET_SPENTS_SERVICE)
+    constructor(
+        @inject(SpentsEnum.GET_SPENTS_SERVICE) private getSpentsRepository: GetSpentsRepositoryJson
+    ) {}
 
-        await spents.import(data)
+    async getSpent(response: Response, request: Request, data: SpentsData): Promise<any> {
+        const rep = response.status(200).send(async () => {
+            const spents = await this.getSpentsRepository.getSpents(data)
+
+            if(!spents) {
+                response.status(500).send({'message': 'Unknow error'})
+            }
+
+            return rep
+        })
     }
+
 }

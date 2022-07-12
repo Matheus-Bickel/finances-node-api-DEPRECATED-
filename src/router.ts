@@ -1,22 +1,12 @@
 import 'reflect-metadata'
 
 import { app } from './app'
-import { Request, Response, Router } from 'express'
-import { GetSpentsController } from './Modules/Spents/Infra/Http/Controllers/GetSpentsController';
-import { SpentsData } from './Modules/Spents/Domain/SpentsData';
+import { Router } from 'express'
 
-
+const GetSpentsController = require('./Modules/Spents/Infra/Http/Controllers/GetSpentsController')
 const router = Router()
-
-
 app.use(router);
 
-router.get('/spents', (req: Request, res: Response) => {
-    let data: SpentsData
-    const spent = new GetSpentsController().getSpents(data)
-
-    console.log(spent)
-    res.send(spent)
-})
+router.get('/spents', GetSpentsController.getSpent)
 
 export { router }
