@@ -1,13 +1,13 @@
 import { inject, injectable } from "tsyringe";
 import { SpentsData } from "../Domain/SpentsData";
 import { SpentsRepositoriesEnum } from "../Domain/SpentsRepositoriesEnum";
-import { GetSpentsRepositoryJson } from "../Infra/Json/GetSpentsRepositoryJson";
 import { GetSpentsService } from "../Domain/GetSpentsService";
 import { SpentsDataToJsonAdapter } from "../Infra/Adapters/SpentsDataToJsonAdapter";
+import { GetSpentsRepository } from "../Domain/GetSpentsRepository";
 @injectable()
 export class GetSpentsServiceImpl implements GetSpentsService {
     constructor(
-        @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsRepository: GetSpentsRepositoryJson
+        @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsRepository: GetSpentsRepository
     ){}
 
     private getSpent(data: SpentsData): Promise<SpentsData[]> {

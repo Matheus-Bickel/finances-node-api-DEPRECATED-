@@ -1,13 +1,12 @@
 import { inject } from "tsyringe";
-import { Response, Request } from "express";
-
-import { GetSpentsRepositoryJson } from "../../Json/GetSpentsRepositoryJson";
 import { Controller } from "../../../../../App/Http/Controllers/Controller";
 import { SpentsData } from "../../../Domain/SpentsData";
 import { SpentsEnum } from "../../../Domain/SpentsEnum";
+import { Response, Request } from "express";
+import { GetSpentsRepository } from "../../../Domain/GetSpentsRepository";
 export class GetSpentsController implements Controller {
     constructor(
-        @inject(SpentsEnum.GET_SPENTS_SERVICE) private getSpentsRepository: GetSpentsRepositoryJson
+        @inject(SpentsEnum.GET_SPENTS_SERVICE) private getSpentsRepository: GetSpentsRepository
     ) {}
 
     async getSpent(response: Response, request: Request, data: SpentsData): Promise<any> {
@@ -21,5 +20,4 @@ export class GetSpentsController implements Controller {
             return rep
         })
     }
-
 }
