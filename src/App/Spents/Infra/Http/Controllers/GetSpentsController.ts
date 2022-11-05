@@ -6,9 +6,7 @@ import { GetSpentsRepositoryJson } from "../../Json/GetSpentsRepositoryJson";
 export class GetSpentsController implements Controller {
 
     async getSpent(req: Request, res: Response): Promise<SpentsData> {
-        const getSpentsRepository = new GetSpentsRepositoryJson()
-        
-        const data = GetSpentsServiceImpl.from(getSpentsRepository)
+        const data = GetSpentsServiceImpl.from(GetSpentsRepositoryJson.of())
 
         return await res.send(await data.getData())
     }

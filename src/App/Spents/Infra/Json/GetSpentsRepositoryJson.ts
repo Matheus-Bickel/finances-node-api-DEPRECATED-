@@ -16,7 +16,7 @@ export class GetSpentsRepositoryJson implements GetSpentsRepository {
         return await JSON.parse(spent)
     }
 
-    static from(): GetSpentsRepositoryJson {
+    static of(): GetSpentsRepositoryJson {
         return new GetSpentsRepositoryJson()
     }
 }
