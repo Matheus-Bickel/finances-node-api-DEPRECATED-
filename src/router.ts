@@ -1,19 +1,19 @@
-import 'reflect-metadata'
+import 'reflect-metadata';
 
-import { app } from './app'
-import { Router } from 'express'
-import { BoostrapStart } from './App/Spents/Bootstrap/BootstrapStart'
+import { Request, Response, Router } from 'express';
+import { app } from './app';
+import { GetSpentsController } from './App/Spents/Infra/Http/Controllers/GetSpentsController';
+import { getBootstrapStarted } from './main';
 
-const GetSpentsController = require('./App/Spents/Infra/Http/Controllers/GetSpentsController')
+
 const router = Router()
 app.use(router);
 
-async function startBoostrap() {
-    return new BoostrapStart().getStarted()
-}
+getBootstrapStarted()
 
-router.get('/spents', GetSpentsController.getSpent)
+router.get('/spents', function (req: Request, res: Response) {
+    return new GetSpentsController().getSpent(req, res)
+})
 
-startBoostrap()
+export { router };
 
-export { router }

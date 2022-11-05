@@ -1,25 +1,22 @@
-import { injectable } from  'tsyringe'
+import { injectable } from 'tsyringe';
 import { GetSpentsRepository } from "../../Domain/GetSpentsRepository";
 import { SpentsData } from "../../Domain/SpentsData";
 
-import fs from 'fs'
-import util from 'util'
+import fs from 'fs';
+import util from 'util';
 
 const readFile = util.promisify(fs.readFile)
 @injectable()
 export class GetSpentsRepositoryJson implements GetSpentsRepository {
-    async getSpents(data: SpentsData): Promise<SpentsData[]> {
+    async getSpents(): Promise<SpentsData[]> {
         const spent = await readFile('mocks/json/spents.json', {
             encoding: 'utf-8'
         })
 
-        const json = JSON.parse(spent)
-        return json
+        return await JSON.parse(spent)
     }
 
     static from(): GetSpentsRepositoryJson {
-        const getSpents = new GetSpentsRepositoryJson()
-
-        return getSpents
+        return new GetSpentsRepositoryJson()
     }
 }

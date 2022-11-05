@@ -1,25 +1,28 @@
 import { inject, injectable } from "tsyringe";
+import { GetSpentsRepository } from "../Domain/GetSpentsRepository";
+import { GetSpentsService } from "../Domain/GetSpentsService";
 import { SpentsData } from "../Domain/SpentsData";
 import { SpentsRepositoriesEnum } from "../Domain/SpentsRepositoriesEnum";
-import { GetSpentsService } from "../Domain/GetSpentsService";
 import { SpentsDataToJsonAdapter } from "../Infra/Adapters/SpentsDataToJsonAdapter";
-import { GetSpentsRepository } from "../Domain/GetSpentsRepository";
 @injectable()
 export class GetSpentsServiceImpl implements GetSpentsService {
     constructor(
         @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsRepository: GetSpentsRepository
     ){}
 
-    private getSpent(data: SpentsData): Promise<SpentsData[]> {
-        const spents = this.getSpentsRepository.getSpents(data)
-        return spents
+    async getData(): Promise<SpentsData[]> {
+
+        const spents = await this.getSpent()
+        const jsonAdapter = SpentsDataToJsonAdapter.from()
+        
+        return await jsonAdapter.toJson(spents)
     }
 
-    async import(data: SpentsData): Promise<SpentsData[]> {
-        const spents = await this.getSpent(data)
-        const jsonAdapter = SpentsDataToJsonAdapter.from()
-        const spentJson = jsonAdapter.toJson(spents)
-        
-        return spentJson
+    private async getSpent(): Promise<SpentsData[]> {
+        return await this.getSpentsRepository.getSpents()   
+    }
+
+    static from(getSpentsRepository: GetSpentsRepository): GetSpentsServiceImpl {
+        return new GetSpentsServiceImpl(getSpentsRepository)
     }
 }
