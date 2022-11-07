@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { Filter } from "../../../Commom/Filter/Filter";
 import { GetSpentsRepository } from "../Domain/GetSpentsRepository";
 import { GetSpentsService } from "../Domain/GetSpentsService";
 import { SpentsData } from "../Domain/SpentsData";
@@ -10,16 +11,16 @@ export class GetSpentsServiceImpl implements GetSpentsService {
         @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsRepository: GetSpentsRepository
     ){}
 
-    async getData(): Promise<SpentsData[]> {
+    async getData(filter?: Filter): Promise<SpentsData[]> {
 
-        const spents = await this.getSpent()
-        const jsonAdapter = SpentsDataToJsonAdapter.from()
+        const spents = await this.getSpent(filter)
+        const json = SpentsDataToJsonAdapter.from()
         
-        return await jsonAdapter.toJson(spents)
+        return await json.toJson(spents)
     }
 
-    private async getSpent(): Promise<SpentsData[]> {
-        return await this.getSpentsRepository.getSpents()   
+    private async getSpent(filter?: Filter): Promise<SpentsData[]> {
+        return await this.getSpentsRepository.getSpents(filter)   
     }
 
     static from(getSpentsRepository: GetSpentsRepository): GetSpentsServiceImpl {

@@ -8,6 +8,23 @@ export class GetSpentsController implements Controller {
     async getSpent(req: Request, res: Response): Promise<SpentsData> {
         const data = GetSpentsServiceImpl.from(GetSpentsRepositoryJson.of())
 
-        return res.send(await data.getData())
+        if(req.query.type) {
+            const filtered =  await data.getData()
+
+
+            for(const spent of filtered) {
+                if(spent.getType() == req.query.type) {
+                    const queryParams = req.query.type
+                    console.log(queryParams, 'query')
+                    return await res.send(await data.getData(queryParams.toString()))
+                }
+            }
+        }
+
+        return await res.send(await data.getData())
+    }
+
+    static from():GetSpentsController {
+        return new GetSpentsController()
     }
 }
