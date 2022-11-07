@@ -1,8 +1,13 @@
 import express from "express";
-import { router } from "./router";
+
 
 const app = express();
-app.use(router);
+
+const port = 3333
 console.log("Server ON");
+
+app.listen(port, () => {
+    return console.log(`Express is listening at http://localhost:${port}`);
+});
 
 export { app };

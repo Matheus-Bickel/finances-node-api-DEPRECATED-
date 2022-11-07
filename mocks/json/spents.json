@@ -11,8 +11,8 @@
     },
     {
         "id": 2,
-        "name": "Uber",
-        "type": "DEBIT",
+        "name": "Uber 2",
+        "type": "CREDIT",
         "value": 12,
         "date": "20-05-2022",
         "parcels": 0,
@@ -22,6 +22,16 @@
     {
         "id": 3,
         "name": "Uber",
+        "type": "DEBIT",
+        "value": 12,
+        "date": "20-05-2022",
+        "parcels": 0,
+        "parcelsInitialDate": "",
+        "parcelsfinalDate": ""
+    },
+    {
+        "id": 4,
+        "name": "Uber",
         "type": "PIX",
         "value": 12,
         "date": "20-05-2022",
@@ -30,7 +40,7 @@
         "parcelsfinalDate": ""
     },
     {
-        "id": 1,
+        "id": 5,
         "name": "Uber",
         "type": "CREDIT",
         "value": 12,

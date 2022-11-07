@@ -6,7 +6,8 @@ export type Json =
     | JsonArray
     | Json[]
     | null
-
+    | undefined
+    | any
 export interface JsonObject {
     [key: string]: Json
 }
