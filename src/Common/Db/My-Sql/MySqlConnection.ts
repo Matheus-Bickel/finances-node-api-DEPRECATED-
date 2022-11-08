@@ -1,8 +1,8 @@
-import { DbCommand } from "../Db-Command";
-import { DbConnection } from "../Db-Connection";
-import { MySqlCommand } from "./My-Sql-Command";
+import { DbCommand } from "../DbCommand";
+import { DbConnection } from "../DbConnection";
+import { MySqlCommand } from "./MySqlCommand";
 
-import mySql from 'mysql';
+import MySql from 'mysql2';
 
 export interface MySqlDbConnectionConfig {
     host: string
@@ -11,10 +11,10 @@ export interface MySqlDbConnectionConfig {
     database: string
 }
 export class MySqlConnection implements DbConnection {
-    private conn: mySql.Connection
+    private conn: MySql.Connection
 
     constructor(config: MySqlDbConnectionConfig) {
-        this.conn = mySql.createConnection(config)
+        this.conn = MySql.createConnection(config)
     }
     
     async open(): Promise<DbConnection> {

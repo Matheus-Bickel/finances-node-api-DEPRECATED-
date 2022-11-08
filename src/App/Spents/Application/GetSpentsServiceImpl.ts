@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
-import { Filter } from "../../../Commom/Filter/Filter";
+import { Filter } from "../../../Common/Filter/Filter";
+
 import { GetSpentsRepository } from "../Domain/GetSpentsRepository";
 import { GetSpentsService } from "../Domain/GetSpentsService";
 import { SpentsData } from "../Domain/SpentsData";

@@ -1,4 +1,4 @@
-import { DbCommand } from "./Db-Command"
+import { DbCommand } from "./DbCommand"
 
 export interface DbConnection {
     command(): DbCommand<any>
