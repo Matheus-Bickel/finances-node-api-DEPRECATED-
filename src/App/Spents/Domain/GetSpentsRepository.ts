@@ -1,4 +1,5 @@
-import { Filter } from "../../../Commom/Filter/Filter";
+
+import { Filter } from "../../../Common/Filter/Filter";
 import { SpentsData } from "./SpentsData";
 
 export interface GetSpentsRepository {
