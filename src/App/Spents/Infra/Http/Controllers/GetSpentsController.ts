@@ -1,10 +1,11 @@
-import { Request, Response } from "express";
-import { Controller } from "../../../../../App/Http/Controllers/Controller";
-import { MySqlConnection } from "../../../../../Common/Db/My-Sql/MySqlConnection";
-import { GetSpentsServiceImpl } from "../../../Application/GetSpentsServiceImpl";
-import { SpentsData } from "../../../Domain/SpentsData";
-import { GetSpentRepositoryMysql } from "../../My-Sql/GetSpentRepositorMySql";
-export class GetSpentsController implements Controller {
+import { Request, Response } from 'express';
+import { MySqlConnection } from '../../../../../Common/Db/My-Sql/MySqlConnection';
+import { GetController } from '../../../../Http/Controllers/GetController';
+import { GetSpentsServiceImpl } from '../../../Application/GetSpentsServiceImpl';
+import { SpentsData } from '../../../Domain/SpentsData';
+import { GetSpentRepositoryMysql } from '../../My-Sql/GetSpentRepositorMySql';
+
+export class GetSpentsController implements GetController {
 
     private conn = new MySqlConnection({
         host: '127.0.0.1',

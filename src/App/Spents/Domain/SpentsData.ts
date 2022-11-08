@@ -9,9 +9,9 @@ export interface SpentsDataParams {
     type: SpentTypeEnum
     value: number
     date: Date
-    parcels: number
-    parcelsInitialDate: Date
-    parcelsfinalDate: Date
+    parcels?: number
+    parcelsInitialDate?: Date
+    parcelsfinalDate?: Date
 }
 
 export abstract class SpentsData {
