@@ -8,6 +8,10 @@ export class GetSpentsController implements Controller {
     async getSpent(req: Request, res: Response): Promise<SpentsData> {
         const data = GetSpentsServiceImpl.from(GetSpentsRepositoryJson.of())
 
-        return res.send(await data.getData())
+        return await res.send(await data.getData())
+    }
+
+    static from():GetSpentsController {
+        return new GetSpentsController()
     }
 }
