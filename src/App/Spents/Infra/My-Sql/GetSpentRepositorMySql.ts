@@ -14,11 +14,19 @@ export class GetSpentRepositoryMysql implements GetSpentsRepository {
 
         try {
             const command = this.conn.command()
+
+            if(filter) {
+                const exec = await command.execute({
+                    commandText: 'SELECT * FROM SPENTS WHERE id = 1'
+                })
+
+                return exec
+            }
             const exec = await command.execute({
                 commandText: 'SELECT * FROM SPENTS'
             })
 
-            return await JSON.parse(exec)
+            return await exec
 
         } finally {
             await this.conn.close()
