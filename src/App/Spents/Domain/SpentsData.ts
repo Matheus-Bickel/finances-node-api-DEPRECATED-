@@ -1,3 +1,4 @@
+import { Filter } from '../../../Commom/Filter/Filter'
 import { Json } from '../../../lib/Json'
 import { SpentTypeEnum } from './SpentTypeEnum'
 
@@ -13,7 +14,7 @@ export interface SpentsDataParams {
 }
 
 export abstract class SpentsData {
-    constructor(protected params: SpentsDataParams) {}
+    constructor(protected params: SpentsDataParams, filter?: Filter) {}
 
     getId(): number {
         return this.params.id
