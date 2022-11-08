@@ -19,8 +19,8 @@ export class GetSpentsServiceImpl implements GetSpentsService {
         return await json.toJson(spents)
     }
 
-    private async getSpent(filter?: Filter): Promise<SpentsData[]> {
-        return await this.getSpentsRepository.getSpents(filter)   
+    private async getSpent(filter?: Filter, params?: number): Promise<SpentsData[]> {
+        return await this.getSpentsRepository.getSpents(filter, params)   
     }
 
     static from(getSpentsRepository: GetSpentsRepository): GetSpentsServiceImpl {
