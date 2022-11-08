@@ -13,7 +13,11 @@ app.use(router);
 getBootstrapStarted()
 
 router.get('/spents', function (req: Request, res: Response) {
-    GetSpentsController.from().getSpent(req, res)
+    return GetSpentsController.from().getSpents(req, res)
+})
+
+router.get('/spents/:id', function (req: Request, res: Response) {
+   return GetSpentsController.from().getSpentById(req, res)
 })
 
 export { router };
