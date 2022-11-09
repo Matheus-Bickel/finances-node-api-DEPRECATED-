@@ -16,7 +16,7 @@ export class GetSpentsServiceImpl implements GetSpentsService {
     async getData(filter?: Filter,): Promise<SpentsData[]> {
         
         if(!isEmpty(filter)) {
-            const spents = await this.getSpent(filter)
+            return await this.getSpent(filter)
         } 
         
         const spents = await this.getSpent()

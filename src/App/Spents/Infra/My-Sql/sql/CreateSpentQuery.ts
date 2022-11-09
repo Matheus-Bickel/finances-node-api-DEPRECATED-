@@ -1,0 +1,2 @@
+export const CREATE = 
+`INSERT INTO SPENTS VALUES (?,?,?,?,?,?,?,?)`

@@ -12,21 +12,23 @@ const router = Router()
 app.use(router)
 app.use(bodyParser.json())
 
+
 async () => {
     await getBootstrapStarted()
 }
 
 router.get('/spents', function (req: Request, res: Response) {
-    console.log(req.query)
+    console.log(req.query, 'SPENTS QUERY')
     return GetSpentsController.from().getSpents(req, res)
 })
 
 router.get('/spents/:id', function (req: Request, res: Response) {
-    console.log(req.params.id)
+    console.log(req.params.id, 'SPENTS/ID PARAM')
    return GetSpentsController.from().getSpentById(req, res)
 })
 
 router.post('/spents/createSpent', function (req: Request, res: Response) {
-    console.log(req.body)
+    console.log(req.body, 'CRATED SPENT BODY')
+    
     return CreateSpentController.from().create(req, res)
 })  

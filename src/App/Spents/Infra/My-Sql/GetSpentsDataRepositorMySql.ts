@@ -20,21 +20,19 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
             if(!isEmpty(filter)) {
                 const type = filter.type
 
-                const exec = await command.execute({
+                const data = await command.execute({
                     commandText: QUERY,
                     binds: [type]
                 })
 
-                console.log(exec)
+                return data                
+            } 
 
-                return exec
-            } else {
-                const exec = await command.execute({
-                    commandText: 'SELECT * FROM SPENTS'
-                })
-    
-                return await exec
-            }
+            const data = await command.execute({
+                commandText: 'SELECT * FROM SPENTS'
+            })
+            
+            return await data
 
         } finally {
             await this.conn.close()

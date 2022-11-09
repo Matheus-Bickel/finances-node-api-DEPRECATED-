@@ -11,10 +11,9 @@ export class SpentServiceImpl implements SpentService {
 
     async export(data: SpentsData[]): Promise<SpentsData[]> {
         const spentsToSave = []
-        const teste = spentsToSave.push(data)
-        console.log(teste, 'TESTE')
+        spentsToSave.push(data)
 
-       return await this.spentsDataRepository.save(spentsToSave)
+        return await this.spentsDataRepository.save(spentsToSave)
     }
 
     static from(repository: SpentsDataRepository): SpentServiceImpl {

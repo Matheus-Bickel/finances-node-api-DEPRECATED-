@@ -18,11 +18,11 @@ export class CreateSpentController implements CreateController {
         this.data = req.body
         
         const spent = SpentServiceImpl.from(new SpentsDataRepositoryMySql(this.conn))
-        const create = spent.export(this.data)
+        const create = await spent.export(this.data)
 
         return res.send({
             status: 201,
-            body: create
+            body: req.body
         })
     }
 
