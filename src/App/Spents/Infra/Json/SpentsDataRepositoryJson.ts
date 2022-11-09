@@ -7,7 +7,7 @@ import fs from 'fs'
 const spentsJson = require('../../../../../mocks/json/spents.json')
 
 @injectable()
-export class SpentsDataRepositoryAppJson implements SpentsDataRepository {
+export class SpentsDataRepositoryJson implements SpentsDataRepository {
     async save(data: SpentsData[]): Promise<any> {
         const toJson = SpentsDataToJsonAdapter.from()
         const jsonSpents = JSON.stringify(toJson.toJson(data))

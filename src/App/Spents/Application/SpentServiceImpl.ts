@@ -6,7 +6,7 @@ import { SpentsRepositoriesEnum } from '../Domain/SpentsRepositoriesEnum'
 @injectable()
 export class SpentServiceImpl implements SpentService {
     constructor(
-        @inject(SpentsRepositoriesEnum.APP_REPOSITORY) private spentsDataRepository: SpentsDataRepository
+        @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private spentsDataRepository: SpentsDataRepository
     ) {}
 
     async export(data: SpentsData[]): Promise<SpentsData[]> {

@@ -1,6 +1,6 @@
 import { injectable } from 'tsyringe';
 import { Filter } from '../../../../Common/Filter/Filter';
-import { GetSpentsRepository } from "../../Domain/GetSpentsRepository";
+import { GetSpentsDataRepository } from "../../Domain/GetSpentsDataRepository";
 import { SpentsData } from "../../Domain/SpentsData";
 
 import fs from 'fs';
@@ -8,8 +8,8 @@ import util from 'util';
 
 const readFile = util.promisify(fs.readFile)
 @injectable()
-export class GetSpentsRepositoryJson implements GetSpentsRepository {
-    async getSpents(filter: Filter, params: number): Promise<SpentsData[]> {
+export class GetSpentsRepositoryJson implements GetSpentsDataRepository {
+    async getSpents(filter: Filter): Promise<SpentsData[]> {
         const spent = await readFile('mocks/json/spents.json', {
             encoding: 'utf-8'
         })

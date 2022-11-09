@@ -1,7 +1,8 @@
 import { inject, injectable } from "tsyringe";
 import { Filter } from "../../../Common/Filter/Filter";
+import { isEmpty } from "../../../lib/Helpers/functions";
 
-import { GetSpentsRepository } from "../Domain/GetSpentsRepository";
+import { GetSpentsDataRepository } from "../Domain/GetSpentsDataRepository";
 import { GetSpentsService } from "../Domain/GetSpentsService";
 import { SpentsData } from "../Domain/SpentsData";
 import { SpentsRepositoriesEnum } from "../Domain/SpentsRepositoriesEnum";
@@ -9,22 +10,28 @@ import { SpentsDataToJsonAdapter } from "../Infra/Adapters/SpentsDataToJsonAdapt
 @injectable()
 export class GetSpentsServiceImpl implements GetSpentsService {
     constructor(
-        @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsRepository: GetSpentsRepository
+        @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsDataRepository: GetSpentsDataRepository
     ){}
 
-    async getData(filter?: Filter): Promise<SpentsData[]> {
-
-        const spents = await this.getSpent(filter)
+    async getData(filter?: Filter,): Promise<SpentsData[]> {
+        
+        if(!isEmpty(filter)) {
+            const spents = await this.getSpent(filter)
+        } 
+        
+        const spents = await this.getSpent()
         const json = SpentsDataToJsonAdapter.from()
         
         return await json.toJson(spents)
     }
 
-    private async getSpent(filter?: Filter, params?: number): Promise<SpentsData[]> {
-        return await this.getSpentsRepository.getSpents(filter, params)   
+    private async getSpent(filter?: Filter): Promise<SpentsData[]> {
+        if(filter != undefined) {return await this.getSpentsDataRepository.getSpents(filter)}
+
+        return await this.getSpentsDataRepository.getSpents()   
     }
 
-    static from(getSpentsRepository: GetSpentsRepository): GetSpentsServiceImpl {
+    static from(getSpentsRepository: GetSpentsDataRepository): GetSpentsServiceImpl {
         return new GetSpentsServiceImpl(getSpentsRepository)
     }
 }

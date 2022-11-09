@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import { MySqlConnection } from '../../../../../Common/Db/My-Sql/MySqlConnection';
+import { isEmpty } from '../../../../../lib/Helpers/functions';
 import { GetController } from '../../../../Http/Controllers/GetController';
 import { GetSpentsServiceImpl } from '../../../Application/GetSpentsServiceImpl';
 import { SpentsData } from '../../../Domain/SpentsData';
-import { GetSpentRepositoryMysql } from '../../My-Sql/GetSpentRepositorMySql';
+import { GetSpentsDataRepositoryMysql } from '../../My-Sql/GetSpentsDataRepositorMySql';
 
 export class GetSpentsController implements GetController {
 
@@ -15,15 +16,20 @@ export class GetSpentsController implements GetController {
     })
     
     async getSpents(req: Request, res: Response): Promise<SpentsData[]> {
+        const data = GetSpentsServiceImpl.from(new GetSpentsDataRepositoryMysql(this.conn))
+        const filter = req.query
+        console.log(filter, 'filter')
 
-        const data = GetSpentsServiceImpl.from(new GetSpentRepositoryMysql(this.conn))
-
+        if(!isEmpty(filter)) {
+            console.log('caiu aqui')
+            return await res.send(await data.getData(filter))
+        }
+        
         return await res.send(await data.getData())
     }
 
     async getSpentById(req: Request, res: Response): Promise<SpentsData> {
-        const data = GetSpentsServiceImpl.from(new GetSpentRepositoryMysql(this.conn))
-
+        const data = GetSpentsServiceImpl.from(new GetSpentsDataRepositoryMysql(this.conn))
         const id = req.params.id
 
         return await res.send(await data.getData(id))

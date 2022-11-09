@@ -3,6 +3,7 @@ import { DbConnection } from "../DbConnection";
 import { MySqlCommand } from "./MySqlCommand";
 
 import MySql from 'mysql2';
+import { injectable } from "tsyringe";
 
 export interface MySqlDbConnectionConfig {
     host: string
@@ -10,6 +11,8 @@ export interface MySqlDbConnectionConfig {
     password: string
     database: string
 }
+
+@injectable()
 export class MySqlConnection implements DbConnection {
     private conn: MySql.Connection
 
