@@ -5,6 +5,7 @@ import { Filter } from "../../../../Common/Filter/Filter";
 import { isEmpty } from "../../../../lib/Helpers/functions";
 import { GetSpentsDataRepository } from "../../Domain/GetSpentsDataRepository";
 import { SpentsData } from "../../Domain/SpentsData";
+import { QUERY } from "./sql/WhereTypeQuey";
 
 @injectable()
 export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
@@ -17,17 +18,23 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
             const command = this.conn.command()
 
             if(!isEmpty(filter)) {
+                const type = filter.type
+
                 const exec = await command.execute({
-                    commandText: 'SELECT * FROM SPENTS WHERE type = req.query'
+                    commandText: QUERY,
+                    binds: [type]
                 })
 
-                return exec
-            }
-            const exec = await command.execute({
-                commandText: 'SELECT * FROM SPENTS'
-            })
+                console.log(exec)
 
-            return await exec
+                return exec
+            } else {
+                const exec = await command.execute({
+                    commandText: 'SELECT * FROM SPENTS'
+                })
+    
+                return await exec
+            }
 
         } finally {
             await this.conn.close()

@@ -18,7 +18,6 @@ export class GetSpentsController implements GetController {
     async getSpents(req: Request, res: Response): Promise<SpentsData[]> {
         const data = GetSpentsServiceImpl.from(new GetSpentsDataRepositoryMysql(this.conn))
         const filter = req.query
-        console.log(filter, 'filter')
 
         if(!isEmpty(filter)) {
             console.log('caiu aqui')
