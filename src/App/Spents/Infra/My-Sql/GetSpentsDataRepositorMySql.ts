@@ -17,39 +17,41 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
         try {
             const command = this.conn.command()
 
-            if(!isEmpty(filter.type)) {
-                console.log('CAIU NA TYPE?')
-                const type = filter.type
-
-                const data = await command.execute({
-                    commandText: QUERY_TYPE,
-                    binds: [type]
-                })
-
-                console.log(data, 'DATA TYPE')
-
-                return await data    
-
-            } 
-            
-            if (!isEmpty(filter.params)) {
-                const param = filter.params
-                const data = await command.execute({
-                    commandText: QUERY_PARAM,
-                    binds: [param]
-                })
-
-                return await data 
+            if(filter) {
+                if(!isEmpty(filter.type)) {
+                    console.log('CAIU NA TYPE?')
+                    const type = filter.type
+    
+                    const data = await command.execute({
+                        commandText: QUERY_TYPE,
+                        binds: [type]
+                    })
+    
+                    console.log(data, 'DATA TYPE')
+    
+                    return await data    
+    
+                } 
+                
+                if (!isEmpty(filter.params)) {
+                    const param = filter.params
+                    const data = await command.execute({
+                        commandText: QUERY_PARAM,
+                        binds: [param]
+                    })
+    
+                    return await data 
+                }
             }
 
-            const data = await command.execute({
-                commandText: 'SELECT * FROM SPENTS',
-                bind: []
-            })
-            console.log(data, 'DATA')
-            console.log('CAIU NA sem filtro?')
+            if(filter == undefined) {
+                const data = await command.execute({
+                    commandText: 'SELECT * FROM SPENTS',
+                    bind: []
+                })
             
-            return await data
+                return await data
+            }
 
         } finally {
             await this.conn.close()
