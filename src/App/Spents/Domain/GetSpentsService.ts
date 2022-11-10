@@ -1,5 +1,6 @@
+import { Filter } from "../../../Common/Filter/Filter";
 import { SpentsData } from "./SpentsData";
 
 export interface GetSpentsService {
-    getData(): Promise<SpentsData[]>
+    getData(filter?: Filter): Promise<SpentsData[]>
 }

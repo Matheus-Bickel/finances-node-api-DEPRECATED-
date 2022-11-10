@@ -13,22 +13,25 @@ export class GetSpentsServiceImpl implements GetSpentsService {
         @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private getSpentsDataRepository: GetSpentsDataRepository
     ){}
 
-    async getData(filter?: Filter,): Promise<SpentsData[]> {
-        
+    async getData(filter?: Filter): Promise<SpentsData[]> {
+        const adapter = SpentsDataToJsonAdapter.from()
+
         if(!isEmpty(filter)) {
-            return await this.getSpent(filter)
+            return this.getSpent(filter)
         } 
-        
+               
         const spents = await this.getSpent()
-        const json = SpentsDataToJsonAdapter.from()
+        // console.log(spents, 'TODOS')
         
-        return await json.toJson(spents)
+        return await adapter.toJson(spents)
     }
 
     private async getSpent(filter?: Filter): Promise<SpentsData[]> {
-        if(filter != undefined) {return await this.getSpentsDataRepository.getSpents(filter)}
+        if(filter != undefined) {
+            return await this.getSpentsDataRepository.getSpents(filter)
+        }
 
-        return await this.getSpentsDataRepository.getSpents()   
+        return await this.getSpentsDataRepository.getSpents()  
     }
 
     static from(getSpentsRepository: GetSpentsDataRepository): GetSpentsServiceImpl {

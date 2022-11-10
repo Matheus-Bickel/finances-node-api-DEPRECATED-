@@ -14,16 +14,14 @@ async () => {
     await getBootstrapStarted()
 }
 
-router.get('/spents', function (req: Request, res: Response) {
-    console.log(req.query, 'SPENTS QUERY')
-    return GetSpentsController.from().getSpents(req, res)
+router.get('/spents', async function (req: Request, res: Response) {
+    return res.send(await GetSpentsController.from().getSpents(req, res))
 })
 
-router.get('/spents/:id', function (req: Request, res: Response) {
-    console.log(req.params.id, 'SPENTS/ID PARAM')
-   return GetSpentsController.from().getSpentById(req, res)
+router.get('/spents/:id', async function (req: Request, res: Response) {
+   return res.send(await GetSpentsController.from().getSpentById(req, res))
 })
 
-router.post('/spents/createSpent', function (req: Request, res: Response) {
-    return CreateSpentController.from().create(req, res)
+router.post('/spents/createSpent', async function (req: Request, res: Response) {
+    return await CreateSpentController.from().create(req, res)
 })  

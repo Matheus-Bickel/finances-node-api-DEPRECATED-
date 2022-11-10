@@ -5,7 +5,7 @@ import { Filter } from "../../../../Common/Filter/Filter";
 import { isEmpty } from "../../../../lib/Helpers/functions";
 import { GetSpentsDataRepository } from "../../Domain/GetSpentsDataRepository";
 import { SpentsData } from "../../Domain/SpentsData";
-import { QUERY } from "./sql/WhereTypeQuey";
+import { QUERY_PARAM, QUERY_TYPE } from "./sql/WhereTypeQuey";
 
 @injectable()
 export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
@@ -17,20 +17,37 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
         try {
             const command = this.conn.command()
 
-            if(!isEmpty(filter)) {
+            if(!isEmpty(filter.type)) {
+                console.log('CAIU NA TYPE?')
                 const type = filter.type
 
                 const data = await command.execute({
-                    commandText: QUERY,
+                    commandText: QUERY_TYPE,
                     binds: [type]
                 })
 
-                return data                
+                console.log(data, 'DATA TYPE')
+
+                return await data    
+
             } 
+            
+            if (!isEmpty(filter.params)) {
+                const param = filter.params
+                const data = await command.execute({
+                    commandText: QUERY_PARAM,
+                    binds: [param]
+                })
+
+                return await data 
+            }
 
             const data = await command.execute({
-                commandText: 'SELECT * FROM SPENTS'
+                commandText: 'SELECT * FROM SPENTS',
+                bind: []
             })
+            console.log(data, 'DATA')
+            console.log('CAIU NA sem filtro?')
             
             return await data
 
