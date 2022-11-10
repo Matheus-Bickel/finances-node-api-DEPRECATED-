@@ -14,15 +14,15 @@ export class CreateSpentController implements CreateController {
         database: 'finances'
     })
         
-    async create(req: Request, res: Response): Promise<SpentsData[]> {
+    async create(req: Request, res: Response): Promise<any> {
         this.data = req.body
-        
+       
         const spent = SpentServiceImpl.from(new SpentsDataRepositoryMySql(this.conn))
-        const create = await spent.export(this.data)
+        await spent.export(this.data)
 
         return res.send({
             status: 201,
-            body: req.body
+            body: {}
         })
     }
 

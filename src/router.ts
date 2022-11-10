@@ -6,12 +6,9 @@ import { CreateSpentController } from './App/Spents/Infra/Http/Controllers/Creat
 import { GetSpentsController } from './App/Spents/Infra/Http/Controllers/GetSpentsController';
 import { getBootstrapStarted } from './main';
 
-const bodyParser = require('body-parser')
-
 const router = Router()
-app.use(router)
-app.use(bodyParser.json())
 
+app.use(router)
 
 async () => {
     await getBootstrapStarted()
@@ -28,7 +25,5 @@ router.get('/spents/:id', function (req: Request, res: Response) {
 })
 
 router.post('/spents/createSpent', function (req: Request, res: Response) {
-    console.log(req.body, 'CRATED SPENT BODY')
-    
     return CreateSpentController.from().create(req, res)
 })  

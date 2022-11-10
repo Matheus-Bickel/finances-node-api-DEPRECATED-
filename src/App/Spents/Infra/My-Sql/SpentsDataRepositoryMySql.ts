@@ -9,31 +9,38 @@ import { CREATE } from "./sql/CreateSpentQuery";
 export class SpentsDataRepositoryMySql implements SpentsDataRepository {
     constructor(@inject(DbTypeConnectionTypeEnum.CONNECTION) private conn: DbConnection) {}
 
-    async save(data: SpentsData[]): Promise<SpentsData[]> {
+    async save(data: SpentsData[]): Promise<any> {
+        
         await this.conn.open()
+        const command = this.conn.command()
         
         try {
-            const spent = data
-            console.log(spent, 'SPENT DATA PARA QUERY')
-            const command = this.conn.command()
+            const spents = Object.values(data)
+            console.log(spents, 'DATA')
+            
+            for(const spent of spents) {
+                const values = Object.values(spent)
 
-            // const id  = null
-            // const name = 'teste'
-            // const type = 'pix'
-            // const value = 2000.00
-            // const date = '2022-11-08 16:00:23'
-            // const parcels = 1
-            // const parcelsInitialDate = null
-            // const parcelsfinalDate = null
+                values.forEach(async function getQueryExecuted(spent): Promise<any> {
+                    const exec = await command.execute({
+                        commandText: CREATE,
+                        binds: 
+                        [
+                            spent.id, 
+                            spent.name, 
+                            spent.type, 
+                            spent.value, 
+                            spent.date, 
+                            spent.parcels, 
+                            spent.parcelsInitialDate, 
+                            spent.parcelsfinalDate
+                        ] 
+                    })
 
-
-            const exec = await command.execute({
-                commandText: CREATE,
-                // binds: [id, name, type, value, date, parcels, parcelsInitialDate, parcelsfinalDate]
-            })
-
-            return await exec
-
+                    return exec
+                })
+            }
+            
         } finally {
             await this.conn.close()
         }
