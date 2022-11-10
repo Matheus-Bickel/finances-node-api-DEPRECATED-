@@ -3,8 +3,8 @@ import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { SpentsBootstrap } from "../../Bootstrap/SpentsBootstrap"
 import { GetSpentsService } from '../../Domain/GetSpentsService'
+import { SpentsData } from '../../Domain/SpentsData'
 import { SpentsEnum } from '../../Domain/SpentsEnum'
-import { SpentsDataTest } from './SpentsDataTest'
 
 describe('Should get and return spents', () => {
     beforeAll(async () => {
@@ -14,6 +14,8 @@ describe('Should get and return spents', () => {
     it('get spents', async () => {
         const service = container.resolve<GetSpentsService>(SpentsEnum.GET_SPENTS_SERVICE)
 
-        await service.import(SpentsDataTest.from())
+        const data =await service.getData()
+
+        expect(data).toBeInstanceOf(SpentsData)
     })
 })

@@ -19,15 +19,12 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
 
             if(filter) {
                 if(!isEmpty(filter.type)) {
-                    console.log('CAIU NA TYPE?')
                     const type = filter.type
     
                     const data = await command.execute({
                         commandText: QUERY_TYPE,
                         binds: [type]
                     })
-    
-                    console.log(data, 'DATA TYPE')
     
                     return await data    
     

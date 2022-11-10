@@ -21,7 +21,6 @@ export class GetSpentsServiceImpl implements GetSpentsService {
         } 
                
         const spents = await this.getSpent()
-        // console.log(spents, 'TODOS')
         
         return await adapter.toJson(spents)
     }

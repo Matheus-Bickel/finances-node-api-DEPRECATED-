@@ -34,12 +34,10 @@ export class GetSpentsController implements GetController {
     async getSpentById(req: Request, res: Response): Promise<SpentsData> {
         const data = GetSpentsServiceImpl.from(new GetSpentsDataRepositoryMysql(this.conn))
         this.params = {params: req.params.id}
-        console.log(this.params, 'PARAMS')
         
         const spents = await data.getData(this.params)
-        console.log(spents, 'SPENTS')
+        
         for(const spent of spents) {
-            // console.log(spent, 'APENAS UM')
             return spent
         }
     }
