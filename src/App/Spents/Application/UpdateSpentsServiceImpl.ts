@@ -14,8 +14,9 @@ export class UpdateSpentsServiceImpl implements UpdateSpentService {
     async updateSpent(data: SpentsData[], filter: Filter): Promise<SpentsData> {
         const spentsToSave = []
         spentsToSave.push(data)
-
-        return await this.updateSpentRepository.updateData(spentsToSave, filter)
+        const teste = await this.updateSpentRepository.updateData(spentsToSave, filter)
+        console.log(teste)
+        return teste
     }
 
     private async update(data: SpentsData[], filter?: Filter): Promise<SpentsData> {

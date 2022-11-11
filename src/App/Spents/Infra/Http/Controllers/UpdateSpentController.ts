@@ -22,9 +22,12 @@ export class UpdateSpentController implements UpdateController {
         this.data = req.body
         
         const update = UpdateSpentsServiceImpl.from(new UpdateSpentDataRepositoryMysql(this.conn))
-        
-        return await update.updateSpent(this.data, this.params)
-    
+        const teste = await update.updateSpent(this.data, this.params)
+
+        return res.send({
+            status: 200
+        })
+
     }
 
     static from(): UpdateSpentController {

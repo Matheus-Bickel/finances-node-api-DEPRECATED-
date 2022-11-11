@@ -1,5 +1,5 @@
 export const UPDATE = `
     UPDATE SPENTS
-        WHERE id = ?
-    SET(?)
+        SET id = ?, name = ?, type = ?, value = ?, date = ?, parcels = ?, parcelsInitialDate = ?, parcelsfinalDate = ?
+    WHERE id = ?
 `

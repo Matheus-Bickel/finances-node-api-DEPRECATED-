@@ -23,7 +23,6 @@ export class UpdateSpentDataRepositoryMysql implements UpdateSpentDataRepository
                     commandText: UPDATE,
                     binds: 
                     [
-                        filter.params,
                         spent.id, 
                         spent.name, 
                         spent.type, 
@@ -31,11 +30,12 @@ export class UpdateSpentDataRepositoryMysql implements UpdateSpentDataRepository
                         spent.date, 
                         spent.parcels, 
                         spent.parcelsInitialDate, 
-                        spent.parcelsfinalDate
+                        spent.parcelsfinalDate,
+                        filter.params
                     ] 
                 })
-
-                return exec
+    
+                return spent
             })
         }
     }
