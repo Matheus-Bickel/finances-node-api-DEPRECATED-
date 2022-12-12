@@ -42,7 +42,7 @@ export class GetSpentsController implements GetController {
         }
     }
 
-    static from():GetSpentsController {
+    static from(): GetSpentsController {
         return new GetSpentsController()
     }
 }

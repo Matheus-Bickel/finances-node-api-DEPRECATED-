@@ -27,6 +27,6 @@ router.put('/spents/:id', async function (req: Request, res: Response) {
     return await UpdateSpentController.from().update(req, res)
 })
 
-router.post('/spents/createSpent', async function (req: Request, res: Response) {
+router.post('/spents/create', async function (req: Request, res: Response) {
     return await CreateSpentController.from().create(req, res)
 })
