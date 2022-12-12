@@ -16,7 +16,7 @@ export class SpentsDataRepositoryMySql implements SpentsDataRepository {
         
         try {
             const spents = Object.values(data)
-            console.log(spents, 'DATA')
+            console.log(spents.length, 'DATA')
             
             for(const spent of spents) {
                 const values = Object.values(spent)
@@ -36,8 +36,8 @@ export class SpentsDataRepositoryMySql implements SpentsDataRepository {
                             spent.parcelsfinalDate
                         ] 
                     })
-
-                    return exec
+                
+                    return
                 })
             }
             
@@ -45,5 +45,24 @@ export class SpentsDataRepositoryMySql implements SpentsDataRepository {
             await this.conn.close()
         }
     }
-    
+
+    async getQueryByLastAddRegisters(data: SpentsData[]):Promise<any> {
+        const command = this.conn.command()
+        let limit = 0
+
+        const spents = Object.values(data)
+        
+        for(const spent of spents) {
+            limit++
+        }
+
+        const exec = await command.execute({
+            commandText: 'SELECT * FROM SPENTS WHERE LIMIT = ?',
+            binds: [limit]
+        })
+
+        await this.conn.close()
+        
+        return exec
+    }
 }
