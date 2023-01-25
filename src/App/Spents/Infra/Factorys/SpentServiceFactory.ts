@@ -9,8 +9,6 @@ export function getRepositoryInstanceFromFactory(): SpentsDataRepository {
         password: '',
         database: 'finances'
     })
-
-    const enviroment = process.env.ENVIROMENT
     
     return new SpentsDataRepositoryMySql(conn)
 }

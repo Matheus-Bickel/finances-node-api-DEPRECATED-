@@ -14,9 +14,6 @@ export class SpentServiceImpl implements SpentService {
         spentsToSave.push(data)
         
         await this.spentsDataRepository.save(spentsToSave)
-        const teste = this.spentsDataRepository.getQueryByLastAddRegisters(spentsToSave)
-        console.log(teste, 'teste')
-        return await teste
     }
 
     static from(repository: SpentsDataRepository): SpentServiceImpl {

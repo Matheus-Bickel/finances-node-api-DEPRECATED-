@@ -9,8 +9,7 @@ import { CREATE } from "./sql/CreateSpentQuery";
 export class SpentsDataRepositoryMySql implements SpentsDataRepository {
     constructor(@inject(DbTypeConnectionTypeEnum.CONNECTION) private conn: DbConnection) {}
 
-    async save(data: SpentsData[]): Promise<any> {
-        
+    async save(data: SpentsData[]): Promise<void> {
         await this.conn.open()
         const command = this.conn.command()
         
@@ -21,8 +20,8 @@ export class SpentsDataRepositoryMySql implements SpentsDataRepository {
             for(const spent of spents) {
                 const values = Object.values(spent)
 
-                values.forEach(async function getQueryExecuted(spent): Promise<any> {
-                    const exec = await command.execute({
+                values.forEach(async function getQueryExecuted(spent): Promise<void> {
+                    await command.execute({
                         commandText: CREATE,
                         binds: 
                         [
@@ -36,7 +35,7 @@ export class SpentsDataRepositoryMySql implements SpentsDataRepository {
                             spent.parcelsfinalDate
                         ] 
                     })
-                
+                    
                     return
                 })
             }
@@ -44,25 +43,5 @@ export class SpentsDataRepositoryMySql implements SpentsDataRepository {
         } finally {
             await this.conn.close()
         }
-    }
-
-    async getQueryByLastAddRegisters(data: SpentsData[]):Promise<any> {
-        const command = this.conn.command()
-        let limit = 0
-
-        const spents = Object.values(data)
-        
-        for(const spent of spents) {
-            limit++
-        }
-
-        const exec = await command.execute({
-            commandText: 'SELECT * FROM SPENTS WHERE LIMIT = ?',
-            binds: [limit]
-        })
-
-        await this.conn.close()
-        
-        return exec
     }
 }
