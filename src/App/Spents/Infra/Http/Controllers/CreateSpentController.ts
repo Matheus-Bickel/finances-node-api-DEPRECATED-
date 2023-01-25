@@ -5,17 +5,19 @@ import { SpentsData } from "../../../Domain/SpentsData";
 import { getRepositoryInstanceFromFactory } from '../../Factorys/SpentServiceFactory';
 export class CreateSpentController implements CreateController {
     private data: SpentsData[]
+    private type: 
         
     async create(req: Request, res: Response): Promise<any> {
         this.data = req.body
        
         const spent = SpentServiceImpl.from(getRepositoryInstanceFromFactory())
         await spent.export(this.data)
+        
 
-        return res.send({
-            status: 201,
-            body: {}
-        })
+        // return res.send({
+        //     status: 201,
+        //     body: {}
+        // })
     }
 
     static from(): CreateSpentController {
