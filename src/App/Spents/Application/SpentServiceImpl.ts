@@ -9,7 +9,7 @@ export class SpentServiceImpl implements SpentService {
         @inject(SpentsRepositoriesEnum.SPENTS_REPOSITORY) private spentsDataRepository: SpentsDataRepository
     ) {}
 
-    async export(data: SpentsData[]): Promise<SpentsData[]> {
+    async export(data: SpentsData[]): Promise<void> {
         const spentsToSave = []
         spentsToSave.push(data)
         
