@@ -28,5 +28,5 @@ router.put('/spents/:id', async function (req: Request, res: Response) {
 })
 
 router.post('/spents/create', async function (req: Request, res: Response) {
-    return await CreateSpentController.from().create(req, res)
+    res.send(await CreateSpentController.from().create(req, res))
 })
