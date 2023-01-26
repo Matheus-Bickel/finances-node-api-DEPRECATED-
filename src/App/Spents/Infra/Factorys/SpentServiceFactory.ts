@@ -1,7 +1,14 @@
 import { MySqlConnection } from "../../../../Common/Db/My-Sql/MySqlConnection";
+import { GetLastSpentsDataRegistersRepositoryMySql } from "../My-Sql/GetLastSpentsDataRegistersRepositoryMySql";
+import { RepositoryTypeEnum } from '../My-Sql/RepositoryTypeEnum';
 import { SpentsDataRepositoryMySql } from "../My-Sql/SpentsDataRepositoryMySql";
 
-export function getRepositoryInstanceFromFactory(repository: RepositoryTypeEnum): RepositoryTypeEnum  {
+// export interface RepositoriesTypes {
+//     REPOSITORY: SpentsDataRepositoryMySql | GetLastSpentsDataRegistersRepositoryMySql
+    
+// }
+
+export function getRepositoryInstanceFromFactory(repository: RepositoryTypeEnum): any  {
     const conn = new MySqlConnection({
         host: '127.0.0.1',
         user: 'root',
@@ -9,17 +16,10 @@ export function getRepositoryInstanceFromFactory(repository: RepositoryTypeEnum)
         database: 'finances'
     })
 
-    let repositoryType: T = repository
-
-
     switch(repository) {
-        case 'teste':
+        case RepositoryTypeEnum.REPOSITORY_1:
             return new SpentsDataRepositoryMySql(conn)
-            break
-        case 'teste 2':
-            return  
-            break    
+        case RepositoryTypeEnum.REPOSITORY_2:
+            return new GetLastSpentsDataRegistersRepositoryMySql(conn)
     }
-    
-    return new SpentsDataRepositoryMySql(conn)
 }
