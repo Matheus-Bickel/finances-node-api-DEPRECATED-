@@ -15,17 +15,15 @@ export class GetLastSpentsDataRegistersRepositoryMySql implements GetLastSpentsD
         
         for(const spent of spents) {
             limit++
-            
-            const exec = await command.execute({
-                commandText: 'SELECT * FROM SPENTS LIMIT ?',
-                binds: [limit]
-            })
-
-            const results = []
-            results.push(exec)
-            
-            return results
         }
+
+        const lastRegisters = await command.execute({
+            commandText: 'SELECT * FROM SPENTS LIMIT ?',
+            binds: [limit]
+        })
+
         await this.conn.close()
+        
+        return lastRegisters
     }
 }

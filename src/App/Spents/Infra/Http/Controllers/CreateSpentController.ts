@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request } from 'express';
 import { CreateController } from "../../../../Http/Controllers/CreateController";
 import { SpentServiceImpl } from "../../../Application/SpentServiceImpl";
 import { SpentsData } from "../../../Domain/SpentsData";
@@ -8,7 +8,7 @@ export class CreateSpentController implements CreateController {
     private data: SpentsData[]
     // private type: RepositoryTypeEnum
         
-    async create(req: Request, res: Response): Promise<SpentsData[]> {
+    async create(req: Request): Promise<SpentsData[]> {
         this.data = req.body
     
         const type = RepositoryTypeEnum.REPOSITORY_1
