@@ -18,7 +18,7 @@ export class GetLastSpentsDataRegistersRepositoryMySql implements GetLastSpentsD
         }
 
         const lastRegisters = await command.execute({
-            commandText: 'SELECT * FROM SPENTS LIMIT ?',
+            commandText: 'SELECT * FROM SPENTS ORDER BY id DESC LIMIT ?',
             binds: [limit]
         })
 

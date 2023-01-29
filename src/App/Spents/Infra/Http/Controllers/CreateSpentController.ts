@@ -6,7 +6,6 @@ import { getRepositoryInstanceFromFactory } from '../../Factorys/SpentServiceFac
 import { RepositoryTypeEnum } from '../../My-Sql/RepositoryTypeEnum';
 export class CreateSpentController implements CreateController {
     private data: SpentsData[]
-    // private type: RepositoryTypeEnum
         
     async create(req: Request): Promise<SpentsData[]> {
         this.data = req.body
