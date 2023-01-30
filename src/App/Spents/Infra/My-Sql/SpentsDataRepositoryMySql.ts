@@ -15,7 +15,6 @@ export class SpentsDataRepositoryMySql implements SpentsDataRepository {
         
         try {
             const spents = Object.values(data)
-            console.log(spents.length, 'DATA')
             
             for(const spent of spents) {
                 const values = Object.values(spent)

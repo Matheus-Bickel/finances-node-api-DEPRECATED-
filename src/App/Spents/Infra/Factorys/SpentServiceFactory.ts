@@ -1,5 +1,6 @@
 import { MySqlConnection } from "../../../../Common/Db/My-Sql/MySqlConnection";
 import { GetLastSpentsDataRegistersRepositoryMySql } from "../My-Sql/GetLastSpentsDataRegistersRepositoryMySql";
+import { GetSpentsDataRepositoryMysql } from "../My-Sql/GetSpentsDataRepositorMySql";
 import { RepositoryTypeEnum } from '../My-Sql/RepositoryTypeEnum';
 import { SpentsDataRepositoryMySql } from "../My-Sql/SpentsDataRepositoryMySql";
 
@@ -21,5 +22,7 @@ export function getRepositoryInstanceFromFactory(repository: RepositoryTypeEnum)
             return new SpentsDataRepositoryMySql(conn)
         case RepositoryTypeEnum.REPOSITORY_2:
             return new GetLastSpentsDataRegistersRepositoryMySql(conn)
+        case RepositoryTypeEnum.REPOSITORY_GET:
+            return new GetSpentsDataRepositoryMysql(conn)
     }
 }
