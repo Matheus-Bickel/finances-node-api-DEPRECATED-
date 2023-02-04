@@ -1,8 +1,6 @@
-# finances
-
-Projeto que será desenvolvido pensando em saúde financeira, especificamente em controle de gastos e gestão da renda mensal.
+# finances (PROJETO DE ESTUDO E APLICAÇÃO)
 
 
-Para executar o projeto basta seguir o fluxo abaixo:
+Projeto iniciado em NODE porém devido a necessidade de evoluir em PHP antes de NODE, o projeto será migrado e reescrivo em PHP 8 com Laravel 9.
 
-- npm install
+Link do repo:
