@@ -14,14 +14,17 @@ export class GetSpentsController implements GetController {
     
     async getSpents(req: Request): Promise<SpentsData[]> {
         this.query = req.query
-        
-        const data = GetSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type))
+        try {
+            const data = GetSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type))
 
-        if(!isEmpty(this.query)) {
-            return await data.getData(this.query)
+            if(!isEmpty(this.query)) {
+                return await data.getData(this.query)
+            }
+            
+            return await data.getData()
+        } catch ($e) {
+            
         }
-        
-        return await data.getData()
     }
 
     async getSpentById(req: Request): Promise<SpentsData> {
