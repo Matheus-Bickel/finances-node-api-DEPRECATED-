@@ -10,13 +10,13 @@ export class CreateSpentController implements CreateController {
     async create(req: Request): Promise<SpentsData[]> {
         this.data = req.body
     
-        const type = RepositoryTypeEnum.REPOSITORY_1
-        const type_2 = RepositoryTypeEnum.REPOSITORY_2
+        const rep_1 = RepositoryTypeEnum.REPOSITORY_1
+        const rep_2 = RepositoryTypeEnum.REPOSITORY_2
        
-        const spent = SpentServiceImpl.from(getRepositoryInstanceFromFactory(type))
+        const spent = SpentServiceImpl.from(getRepositoryInstanceFromFactory(rep_1))
         await spent.export(this.data)
 
-        const last = getRepositoryInstanceFromFactory(type_2)
+        const last = getRepositoryInstanceFromFactory(rep_2)
         
         return await last.getQueryByLastAddRegisters(this.data)
     }
