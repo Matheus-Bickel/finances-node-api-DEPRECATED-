@@ -16,12 +16,7 @@ async () => {
 }
 
 router.get('/spents', async function (req: Request, res: Response) {
-    return res.send({
-        status: 200,
-        body: {
-            data: await GetSpentsController.from().getSpents(req)
-        }
-    })
+    return await GetSpentsController.from().formatResponse(req, res)
 })
 
 router.get('/spents/:id', async function (req: Request, res: Response) {

@@ -1,12 +1,7 @@
-import { BaseExceptionInterface } from "../../Exceptions/BaseExceptionInterface";
+import { BaseException } from "../../Exceptions/BaseException";
 
-export class SpentException implements BaseExceptionInterface {
-    exception: BaseExceptionInterface
-    
-    throwException(message: string, statusCode: number): BaseExceptionInterface {
-        return this.exception = {
-            message: message,
-            statusCode: statusCode
-        }
+export class SpentException implements BaseException {
+    exception(message: string, error?: any): any {
+        return 'message + error'
     }
 }
