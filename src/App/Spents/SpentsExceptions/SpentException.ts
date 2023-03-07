@@ -1,7 +1,9 @@
-import { BaseException } from "../../Exceptions/BaseException";
-
+import { BaseException, Exception } from "../../Exceptions/BaseException";
 export class SpentException implements BaseException {
-    exception(message: string, error?: any): any {
-        return 'message + error'
+    exception(error?: Error): Exception {
+        return {
+            error: JSON.parse(error.message),
+            stack: error.stack
+        }
     }
 }

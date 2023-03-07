@@ -23,9 +23,8 @@ export class GetSpentsController implements GetController {
             }
             
             return await data.getData()
-        } catch (error: any) {
-            const teste = new SpentException().exception('deu banana', error)
-            console.log(teste,  'teste')
+        } catch (error) {
+            throw new SpentException().exception(error)
         }
     }
 
@@ -43,28 +42,21 @@ export class GetSpentsController implements GetController {
     async formatResponse(req: Request, res: Response): Promise<Response> {
         const data = await GetSpentsController.from().getSpents(req)
     
-        try {    
-            const resp = res.send({
+        try {
+            console.log(data, 'data 1')
+
+            if(data == undefined) {
+                throw new SpentException().exception()
+            }
+
+            return res.send({
                 status: 200,
                 body: {
                     data: data
                 }
-            })
-
-            console.log(data, 'data')
-
-            if(data == undefined) {
-                const teste = new SpentException().exception('deu banana')
-                console.log(teste,  'teste')
-
-                return teste
-            }
-
-            return resp
-            
-        } catch ($e) {
-            const teste = new SpentException().exception('deu banana', $e)
-            console.log(teste,  'teste')
+            })            
+        } catch (error) {
+            throw new SpentException().exception(error)
         }
         
     }

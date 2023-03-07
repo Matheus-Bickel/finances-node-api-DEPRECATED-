@@ -25,9 +25,8 @@ export class GetSpentsServiceImpl implements GetSpentsService {
             const spents = await this.getSpent()
             
             return await adapter.toJson(spents)
-        } catch (error: any) {
-            const teste = new SpentException().exception('deu banana', error)
-            console.log(teste,  'teste')
+        } catch (error) {
+            throw new SpentException().exception(error)
         }
     }
 

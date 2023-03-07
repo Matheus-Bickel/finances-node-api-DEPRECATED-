@@ -1,3 +1,7 @@
+export interface Exception {
+    error: Error,
+    stack?: string
+}
 export interface BaseException {
-    exception(message: string, error: any): any
+    exception(error: Error): Exception
 }
