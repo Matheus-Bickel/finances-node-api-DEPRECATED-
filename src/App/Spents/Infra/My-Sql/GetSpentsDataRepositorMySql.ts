@@ -25,7 +25,7 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
                         commandText: QUERY_TYPE,
                         binds: [type]
                     })
-    
+                    console.log(data, 'data 1')
                     return await data    
     
                 } 
@@ -36,7 +36,7 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
                         commandText: QUERY_PARAM,
                         binds: [param]
                     })
-    
+                    console.log(data, 'data 2')
                     return await data 
                 }
             }
@@ -44,9 +44,9 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
             if(filter == undefined) {
                 const data = await command.execute({
                     commandText: 'SELECT * FROM SPENTS',
-                    bind: []
+                    binds: []
                 })
-            
+                console.log(data, 'data 3')
                 return await data
             }
 

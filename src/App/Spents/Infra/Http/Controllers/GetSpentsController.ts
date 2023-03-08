@@ -24,7 +24,7 @@ export class GetSpentsController implements GetController {
             
             return await data.getData()
         } catch (error) {
-            throw new SpentException().exception(error)
+            // throw new SpentException().exception(error)
         }
     }
 
