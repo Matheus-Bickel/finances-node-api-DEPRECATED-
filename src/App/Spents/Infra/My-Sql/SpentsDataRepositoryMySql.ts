@@ -34,8 +34,6 @@ export class SpentsDataRepositoryMySql implements SpentsDataRepository {
                             spent.parcelsfinalDate
                         ] 
                     })
-                    
-                    return
                 })
             }
             

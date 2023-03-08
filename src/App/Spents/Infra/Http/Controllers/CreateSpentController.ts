@@ -9,6 +9,7 @@ export class CreateSpentController implements CreateController {
         
     async create(req: Request): Promise<SpentsData[]> {
         this.data = req.body
+        console.log(this.data, 'req')
     
         const rep_1 = RepositoryTypeEnum.REPOSITORY_1
         const rep_2 = RepositoryTypeEnum.REPOSITORY_2

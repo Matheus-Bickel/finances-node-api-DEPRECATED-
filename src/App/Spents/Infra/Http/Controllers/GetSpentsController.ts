@@ -1,22 +1,30 @@
 import { Request, Response } from 'express';
+import { MySqlConnection } from '../../../../../Common/Db/My-Sql/MySqlConnection';
 import { Filter } from '../../../../../Common/Filter/Filter';
 import { isEmpty } from '../../../../../lib/Helpers/functions';
 import { GetController } from '../../../../Http/Controllers/GetController';
 import { GetSpentsServiceImpl } from '../../../Application/GetSpentsServiceImpl';
 import { SpentsData } from '../../../Domain/SpentsData';
 import { SpentException } from '../../../SpentsExceptions/SpentException';
-import { getRepositoryInstanceFromFactory } from '../../Factorys/SpentServiceFactory';
+import { GetSpentsDataRepositoryMysql } from '../../My-Sql/GetSpentsDataRepositorMySql';
 import { RepositoryTypeEnum } from '../../My-Sql/RepositoryTypeEnum';
 
 export class GetSpentsController implements GetController {
     private params: Filter
     private query: Filter
     private type: RepositoryTypeEnum.REPOSITORY_GET
+
+    conn = new MySqlConnection({
+        host: '127.0.0.1',
+        user: 'root',
+        password: '',
+        database: 'finances'
+    })
     
     async getSpents(req: Request): Promise<SpentsData[]> {
         this.query = req.query
         try {
-            const data = GetSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type))
+            const data = GetSpentsServiceImpl.from(new GetSpentsDataRepositoryMysql(this.conn))
 
             if(!isEmpty(this.query)) {
                 return await data.getData(this.query)
@@ -31,7 +39,7 @@ export class GetSpentsController implements GetController {
     async getSpentById(req: Request): Promise<SpentsData> {
         this.params = {params: req.params.id}
         
-        const data = GetSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type))
+        const data = GetSpentsServiceImpl.from(new GetSpentsDataRepositoryMysql(this.conn))
         const spents = await data.getData(this.params)
         
         for(const spent of spents) {
@@ -40,11 +48,10 @@ export class GetSpentsController implements GetController {
     }
 
     async formatResponse(req: Request, res: Response): Promise<Response> {
-        const data = await GetSpentsController.from().getSpents(req)
-    
+        const data = GetSpentsController.from()
+        const result = await data.getSpents(req)
+            
         try {
-            console.log(data, 'data 1')
-
             if(data == undefined) {
                 throw new SpentException().exception()
             }
@@ -52,7 +59,7 @@ export class GetSpentsController implements GetController {
             return res.send({
                 status: 200,
                 body: {
-                    data: data
+                    data: result
                 }
             })            
         } catch (error) {

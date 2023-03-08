@@ -13,6 +13,7 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
     
     async getSpents(filter?: Filter): Promise<SpentsData[]> {
         await this.conn.open()
+        console.log('caiu aqui?')
 
         try {
             const command = this.conn.command()
