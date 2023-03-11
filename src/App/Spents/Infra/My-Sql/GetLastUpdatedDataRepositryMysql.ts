@@ -1,0 +1,30 @@
+import { inject } from "tsyringe";
+import { DbConnection } from "../../../../Common/Db/DbConnection";
+import { DbTypeConnectionTypeEnum } from "../../../../Common/Db/DbConnectionTypeEnum";
+import { GetLastUpdatedDataRepository } from "../../Domain/GetLastUpdatedDataRepository";
+import { SpentsData } from "../../Domain/SpentsData";
+
+export class GetLastUpdatedDataRepositryMysql implements GetLastUpdatedDataRepository {
+    constructor(@inject(DbTypeConnectionTypeEnum.CONNECTION) private conn: DbConnection) {}
+    
+    async getQueryByLastUpadatedRegisters(data: SpentsData): Promise<SpentsData> {
+        const command = this.conn.command()
+        let limit = 0
+
+        const spents = Object.values(data)
+        
+        for(const spent of spents) {
+            limit++
+        }
+
+        const lastRegisters = await command.execute({
+            commandText: 'SELECT * FROM SPENTS ORDER BY id DESC LIMIT ?',
+            binds: [limit]
+        })
+
+        await this.conn.close()
+        
+        return lastRegisters
+    }
+
+}
