@@ -17,13 +17,13 @@ export class GetLastSpentsDataRegistersRepositoryMySql implements GetLastSpentsD
             limit++
         }
 
-        const exec = await command.execute({
-            commandText: 'SELECT * FROM SPENTS WHERE LIMIT = ?',
+        const lastRegisters = await command.execute({
+            commandText: 'SELECT * FROM SPENTS ORDER BY id DESC LIMIT ?',
             binds: [limit]
         })
 
         await this.conn.close()
         
-        return exec
+        return lastRegisters
     }
 }

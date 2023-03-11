@@ -7,6 +7,7 @@ import { GetSpentsService } from "../Domain/GetSpentsService";
 import { SpentsData } from "../Domain/SpentsData";
 import { SpentsRepositoriesEnum } from "../Domain/SpentsRepositoriesEnum";
 import { SpentsDataToJsonAdapter } from "../Infra/Adapters/SpentsDataToJsonAdapter";
+import { SpentException } from "../SpentsExceptions/SpentException";
 @injectable()
 export class GetSpentsServiceImpl implements GetSpentsService {
     constructor(
@@ -14,15 +15,19 @@ export class GetSpentsServiceImpl implements GetSpentsService {
     ){}
 
     async getData(filter?: Filter): Promise<SpentsData[]> {
-        const adapter = SpentsDataToJsonAdapter.from()
+        try {
+            const adapter = SpentsDataToJsonAdapter.from()
 
-        if(!isEmpty(filter)) {
-            return this.getSpent(filter)
-        } 
-               
-        const spents = await this.getSpent()
-        
-        return await adapter.toJson(spents)
+            if(!isEmpty(filter)) {
+                return this.getSpent(filter)
+            } 
+                
+            const spents = await this.getSpent()
+            
+            return await adapter.toJson(spents)
+        } catch (error) {
+            throw new SpentException().exception(error)
+        }
     }
 
     private async getSpent(filter?: Filter): Promise<SpentsData[]> {
@@ -30,7 +35,7 @@ export class GetSpentsServiceImpl implements GetSpentsService {
             return await this.getSpentsDataRepository.getSpents(filter)
         }
 
-        return await this.getSpentsDataRepository.getSpents()  
+        return await this.getSpentsDataRepository.getSpents()
     }
 
     static from(getSpentsRepository: GetSpentsDataRepository): GetSpentsServiceImpl {

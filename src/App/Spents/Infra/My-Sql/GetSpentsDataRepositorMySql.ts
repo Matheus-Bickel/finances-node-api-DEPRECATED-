@@ -21,35 +21,28 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
                 if(!isEmpty(filter.type)) {
                     const type = filter.type
     
-                    const data = await command.execute({
+                    return await command.execute({
                         commandText: QUERY_TYPE,
                         binds: [type]
                     })
-    
-                    return await data    
-    
                 } 
                 
                 if (!isEmpty(filter.params)) {
                     const param = filter.params
-                    const data = await command.execute({
+                    
+                    return await command.execute({
                         commandText: QUERY_PARAM,
                         binds: [param]
                     })
-    
-                    return await data 
                 }
             }
 
             if(filter == undefined) {
-                const data = await command.execute({
+                return await command.execute({
                     commandText: 'SELECT * FROM SPENTS',
-                    bind: []
+                    binds: []
                 })
-            
-                return await data
             }
-
         } finally {
             await this.conn.close()
         }
