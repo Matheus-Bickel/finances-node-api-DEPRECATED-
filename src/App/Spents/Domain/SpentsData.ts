@@ -1,4 +1,5 @@
-import { Filter } from '../../../Commom/Filter/Filter'
+
+import { Filter } from '../../../Common/Filter/Filter'
 import { Json } from '../../../lib/Json'
 import { SpentTypeEnum } from './SpentTypeEnum'
 
@@ -8,9 +9,9 @@ export interface SpentsDataParams {
     type: SpentTypeEnum
     value: number
     date: Date
-    parcels: number
-    parcelsInitialDate: Date
-    parcelsfinalDate: Date
+    parcels?: number
+    parcelsInitialDate?: Date
+    parcelsfinalDate?: Date
 }
 
 export abstract class SpentsData {

@@ -1,5 +1,5 @@
-import { BoostrapStart } from "./App/Spents/Bootstrap/BootstrapStart";
+import { BootstrapStart } from "./Common/Bootstrap/BootstrapStart"
 
 export async function getBootstrapStarted() {
-    return await new BoostrapStart().getStarted()
+    return await new BootstrapStart().getStarted()
 }
