@@ -1,33 +1,45 @@
 import { Request, Response } from "express";
-import { MySqlConnection } from "../../../../../Common/Db/My-Sql/MySqlConnection";
 import { Filter } from "../../../../../Common/Filter/Filter";
 import { UpdateController } from "../../../../Http/Controllers/UpdateController";
 import { UpdateSpentsServiceImpl } from "../../../Application/UpdateSpentsServiceImpl";
 import { SpentsData } from "../../../Domain/SpentsData";
-import { UpdateSpentDataRepositoryMysql } from "../../My-Sql/UpdateSpentDataRepositoryMysql";
+import { SpentException } from "../../../SpentsExceptions/SpentException";
+import { getRepositoryInstanceFromFactory } from "../../Factorys/SpentServiceFactory";
+import { RepositoryTypeEnum } from "../../My-Sql/RepositoryTypeEnum";
 
 export class UpdateSpentController implements UpdateController {
     private data: SpentsData[]
     private params: Filter
+    private type: RepositoryTypeEnum
 
-    private conn = new MySqlConnection({
-        host: '127.0.0.1',
-        user: 'root',
-        password: '',
-        database: 'finances'
-    })
-
-    async update(req: Request, res: Response): Promise<any> {
+    async update(req: Request): Promise<SpentsData> {
         this.params = {params: req.params.id}
         this.data = req.body
+        this.type = RepositoryTypeEnum.REPOSITORY_UPDATE
         
-        const update = UpdateSpentsServiceImpl.from(new UpdateSpentDataRepositoryMysql(this.conn))
-        const teste = await update.updateSpent(this.data, this.params)
+        const update = UpdateSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type))
+        
+        return await update.updateSpent(this.data, this.params)
+    }
 
-        return res.send({
-            status: 200
-        })
+    async getformatedResponse(req: Request, res: Response): Promise<Response> {
+        const data = UpdateSpentController.from()
+        const result = await data.update(req)
+            
+        try {
+            if(data == undefined) {
+                throw new SpentException().exception()
+            }
 
+            return res.send({
+                status: 200,
+                body: {
+                    data: result
+                }
+            })            
+        } catch (error) {
+            throw new SpentException().exception(error)
+        }      
     }
 
     static from(): UpdateSpentController {
