@@ -13,7 +13,6 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
     
     async getSpents(filter?: Filter): Promise<SpentsData[]> {
         await this.conn.open()
-        console.log('caiu aqui?')
 
         try {
             const command = this.conn.command()
@@ -22,35 +21,28 @@ export class GetSpentsDataRepositoryMysql implements GetSpentsDataRepository {
                 if(!isEmpty(filter.type)) {
                     const type = filter.type
     
-                    const data = await command.execute({
+                    return await command.execute({
                         commandText: QUERY_TYPE,
                         binds: [type]
                     })
-                    console.log(data, 'data 1')
-                    return await data    
-    
                 } 
                 
                 if (!isEmpty(filter.params)) {
                     const param = filter.params
-                    const data = await command.execute({
+                    
+                    return await command.execute({
                         commandText: QUERY_PARAM,
                         binds: [param]
                     })
-                    console.log(data, 'data 2')
-                    return await data 
                 }
             }
 
             if(filter == undefined) {
-                const data = await command.execute({
+                return await command.execute({
                     commandText: 'SELECT * FROM SPENTS',
                     binds: []
                 })
-                console.log(data, 'data 3')
-                return await data
             }
-
         } finally {
             await this.conn.close()
         }
