@@ -11,15 +11,18 @@ export class UpdateSpentController implements UpdateController {
     private data: SpentsData[]
     private params: Filter
     private type: RepositoryTypeEnum
+    private type_2: RepositoryTypeEnum
 
     async update(req: Request): Promise<SpentsData> {
         this.params = {params: req.params.id}
         this.data = req.body
-        this.type = RepositoryTypeEnum.REPOSITORY_UPDATE
+        this.type = RepositoryTypeEnum.REPOSITORY_UPDATE_1
+        this.type_2 = RepositoryTypeEnum.REPOSITORY_UPDATE_2
         
         const update = UpdateSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type))
-        
-        return await update.updateSpent(this.data, this.params)
+        await update.updateSpent(this.data, this.params)
+
+        const lastUpdatedRegister = UpdateSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type_2)) 
     }
 
     async getformatedResponse(req: Request, res: Response): Promise<Response> {
