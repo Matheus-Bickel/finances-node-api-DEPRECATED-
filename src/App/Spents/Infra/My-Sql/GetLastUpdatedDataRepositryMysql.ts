@@ -6,20 +6,17 @@ import { SpentsData } from "../../Domain/SpentsData";
 
 export class GetLastUpdatedDataRepositryMysql implements GetLastUpdatedDataRepository {
     constructor(@inject(DbTypeConnectionTypeEnum.CONNECTION) private conn: DbConnection) {}
+
+    private id: number
     
     async getQueryByLastUpadatedRegisters(data: SpentsData): Promise<SpentsData> {
         const command = this.conn.command()
-        let limit = 0
 
-        const spents = Object.values(data)
-        
-        for(const spent of spents) {
-            limit++
-        }
+        this.id = data.getId()
 
         const lastRegisters = await command.execute({
-            commandText: 'SELECT * FROM SPENTS ORDER BY id DESC LIMIT ?',
-            binds: [limit]
+            commandText: 'SELECT * FROM SPENTS WHERE id = ?',
+            binds: [this.id]
         })
 
         await this.conn.close()
