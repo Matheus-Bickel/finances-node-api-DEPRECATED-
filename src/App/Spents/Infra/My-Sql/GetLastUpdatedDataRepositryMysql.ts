@@ -3,25 +3,26 @@ import { DbConnection } from "../../../../Common/Db/DbConnection";
 import { DbTypeConnectionTypeEnum } from "../../../../Common/Db/DbConnectionTypeEnum";
 import { GetLastUpdatedDataRepository } from "../../Domain/GetLastUpdatedDataRepository";
 import { SpentsData } from "../../Domain/SpentsData";
+import { LAST_UPDATED } from "./sql/GetLastUpdatedQuery";
 
 export class GetLastUpdatedDataRepositryMysql implements GetLastUpdatedDataRepository {
     constructor(@inject(DbTypeConnectionTypeEnum.CONNECTION) private conn: DbConnection) {}
-
-    private id: number
-    
-    async getQueryByLastUpadatedRegisters(data: SpentsData): Promise<SpentsData> {
+        
+    async getQueryByLastUpdatedRegisters(id: number): Promise<SpentsData> {
         const command = this.conn.command()
 
-        this.id = data.getId()
+        try {
+            const lastRegisters = await command.execute({
+                commandText: LAST_UPDATED,
+                binds: [id]
+            })
+    
+            await this.conn.close()
+            console.log(lastRegisters, 'lasts')
 
-        const lastRegisters = await command.execute({
-            commandText: 'SELECT * FROM SPENTS WHERE id = ?',
-            binds: [this.id]
-        })
-
-        await this.conn.close()
-        
-        return lastRegisters
+            return lastRegisters
+        } catch (error) {
+            console.log(error, 'error')
+        }
     }
-
 }

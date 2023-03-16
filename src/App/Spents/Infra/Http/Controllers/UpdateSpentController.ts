@@ -22,7 +22,9 @@ export class UpdateSpentController implements UpdateController {
         const update = UpdateSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type))
         await update.updateSpent(this.data, this.params)
 
-        const lastUpdatedRegister = UpdateSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type_2)) 
+        const lastUpdatedRegister = getRepositoryInstanceFromFactory(this.type_2)
+        
+        return await lastUpdatedRegister.getQueryByLastUpdatedRegisters(req.params.id)
     }
 
     async getformatedResponse(req: Request, res: Response): Promise<Response> {
