@@ -10,6 +10,7 @@ export class GetLastUpdatedDataRepositryMysql implements GetLastUpdatedDataRepos
         
     async getQueryByLastUpdatedRegisters(id: number): Promise<SpentsData> {
         const command = this.conn.command()
+        console.log(id, 'id')
 
         try {
             const lastRegisters = await command.execute({

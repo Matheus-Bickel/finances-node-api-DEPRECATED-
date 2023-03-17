@@ -20,7 +20,7 @@ export class UpdateSpentController implements UpdateController {
         this.type_2 = RepositoryTypeEnum.REPOSITORY_UPDATE_2
         
         const update = UpdateSpentsServiceImpl.from(getRepositoryInstanceFromFactory(this.type))
-        await update.updateSpent(this.data, this.params)
+        update.updateSpent(this.data, this.params)
 
         const lastUpdatedRegister = getRepositoryInstanceFromFactory(this.type_2)
         
