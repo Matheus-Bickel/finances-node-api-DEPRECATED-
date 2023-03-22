@@ -16,25 +16,15 @@ async () => {
 }
 
 router.get('/spents', async function (req: Request, res: Response) {
-    return await GetSpentsController.from().formatResponse(req, res)
+    return await GetSpentsController.from().getformatedResponse(req, res)
 })
 
 router.get('/spents/:id', async function (req: Request, res: Response) {
-   return res.send({
-    status: 200, 
-    body: {
-        data: await GetSpentsController.from().getSpentById(req)
-    }
-   })
+    return await GetSpentsController.from().getformatedResponse(req, res)
 })
 
 router.put('/spents/:id', async function (req: Request, res: Response) {
-    return res.send({
-        status: 200,
-        body: {
-            data: await UpdateSpentController.from().update(req, res)
-        }
-    })
+    return await UpdateSpentController.from().getformatedResponse(req, res)
 })
 
 router.post('/spents/create', async function (req: Request, res: Response) {

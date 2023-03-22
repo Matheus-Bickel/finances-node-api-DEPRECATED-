@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { MySqlConnection } from '../../../../../Common/Db/My-Sql/MySqlConnection';
 import { Filter } from '../../../../../Common/Filter/Filter';
 import { isEmpty } from '../../../../../lib/Helpers/functions';
 import { GetController } from '../../../../Http/Controllers/GetController';
@@ -13,14 +12,7 @@ export class GetSpentsController implements GetController {
     private params: Filter
     private query: Filter
     private type: RepositoryTypeEnum
-
-    conn = new MySqlConnection({
-        host: '127.0.0.1',
-        user: 'root',
-        password: '',
-        database: 'finances'
-    })
-    
+        
     async getSpents(req: Request): Promise<SpentsData[]> {
         this.type = RepositoryTypeEnum.REPOSITORY_GET
         this.query = req.query
@@ -49,7 +41,7 @@ export class GetSpentsController implements GetController {
         }
     }
 
-    async formatResponse(req: Request, res: Response): Promise<Response> {
+    async getformatedResponse(req: Request, res: Response): Promise<Response> {
         const data = GetSpentsController.from()
         const result = await data.getSpents(req)
             

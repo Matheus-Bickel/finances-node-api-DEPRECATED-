@@ -17,9 +17,9 @@ export class CreateSpentController implements CreateController {
         const spent = SpentServiceImpl.from(getRepositoryInstanceFromFactory(rep_1))
         await spent.export(this.data)
 
-        const last = getRepositoryInstanceFromFactory(rep_2)
+        const lastAddedRegisters = getRepositoryInstanceFromFactory(rep_2)
         
-        return await last.getQueryByLastAddRegisters(this.data)
+        return await lastAddedRegisters.getQueryByLastAddRegisters(this.data)
     }
 
     static from(): CreateSpentController {
